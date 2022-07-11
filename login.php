@@ -1,5 +1,12 @@
+<?php
+include 'libs/load.php'
+?>
+
+<!doctype html>
+<html lang="en">
+
 <head>
-	<meta charset="utf-8">
+<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<meta name="description" content="">
 	<meta name="Jerlin" content="Social media">
@@ -27,6 +34,55 @@
 				font-size: 3.5rem;
 			}
 		}
+
+
+
+
+.form-signin {
+  max-width: 330px;
+  padding: 15px;
+}
+
+.form-signin .form-floating:focus-within {
+  z-index: 2;
+}
+
+.form-signin input[type="email"] {
+  margin-bottom: -1px;
+  border-bottom-right-radius: 0;
+  border-bottom-left-radius: 0;
+}
+
+.form-signin input[type="password"] {
+  margin-bottom: 10px;
+  border-top-left-radius: 0;
+  border-top-right-radius: 0;
+}
+
 	</style>
-	
-</head>
+
+  </head>
+
+
+<body>
+
+	<!-- Header -->
+
+	<?php load_template("_header");?>
+
+	<!-- Header -->
+
+	<main>
+
+		<?php load_template("_login");?>
+
+
+	</main>
+	<?php load_template("_footer");?>
+
+	<script src="/app/assets/dist/js/bootstrap.bundle.min.js"></script>
+
+
+</body>
+
+</html>
