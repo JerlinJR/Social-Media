@@ -5,11 +5,12 @@ include 'libs/load.php'
 <!doctype html>
 <html lang="en">
 
-	<?php load_template("_head"); ?>
+<head>
+    <?php load_template("_head"); ?>
+  </head>
+
 
 <body>
-
-
 	<!-- Header -->
 
 	<?php load_template("_header");?>
@@ -18,7 +19,7 @@ include 'libs/load.php'
 
 	<main>
 
-		<?php load_template("_login");?>
+		<?php load_template("_signup");?>
 
 
 	</main>
