@@ -7,12 +7,14 @@
 	<title>Social media</title>
 
 	<link rel="canonical" href="https://getbootstrap.com/docs/5.0/examples/album/">
-	<link rel="stylesheet" href="/css/login.css">
+	<!-- <link rel="stylesheet" href="/css/login.css"> -->
 
 
 	<!-- Bootstrap core CSS -->
 	<link href="/app/assets/dist/css/bootstrap.min.css" rel="stylesheet">
-
+	<?if (file_exists($_SERVER["DOCUMENT_ROOT"].'/app/css/'.basename($_SERVER['PHP_SELF'],".php").".css")) {?>
+	<link rel="stylesheet" href="/app/css/<?=basename($_SERVER['PHP_SELF'],".php")?>.css">
+	<? } ?>
 	<style>
 		.bd-placeholder-img {
 			font-size: 1.125rem;
