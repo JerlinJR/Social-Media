@@ -13,7 +13,7 @@
     }
 
 
-    function signup($username,$phone,$email,$password){
+    function signup($user,$phone,$email,$pass){
         
         $servername = "localhost";
         $username = "root";
@@ -25,9 +25,9 @@
         // Check connection
         if ($conn->connect_error) {
         die("Connection failed: " . $conn->connect_error);
-        }
-
-        $sql = "";
+        } 
+        $sql = "INSERT INTO `auth` (`id`, `username`, `password`, `email`, `phone`, `blocked`, `active`) 
+        VALUES (NULL, '$user', '$pass', '$email', '$phone', '0', '1');";
 
         if ($conn->query($sql) === TRUE) {
         echo "New record created successfully";
