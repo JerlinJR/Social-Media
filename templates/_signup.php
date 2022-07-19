@@ -1,9 +1,54 @@
 <?php
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
   $signup = false;
 
-  print_r($_POST);
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  //   print_r($_POST);
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
   if (isset($_POST['username']) and isset($_POST['password']) and isset($_POST['email']) and isset($_POST['phone'])) {
       $username = $_POST['username'];
       $password = $_POST['password'];
@@ -14,9 +59,24 @@
       $error =  true;
   }
 
-    if ($signup) {
-        if (!$error) {
-            ?>
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  if ($signup) {
+      if (!$error) {
+          ?>
 <main class="container">
 	<div class="bg-light p-5 rounded mt-3">
 		<h1>Signup Sucess</h1>
@@ -25,19 +85,20 @@
 </main>
 
 <?php
-        } else {
-            ?>
+      } else {
+          ?>
 <main class="container">
 	<div class="bg-light p-5 rounded mt-3">
 		<h1>Signup Failed</h1>
-		<p class="lead">Something went wrong,<?php $error ?></p>
+		<p class="lead">Something went wrong,<?php $error ?>
+		</p>
 	</div>
 </main>
 
 <?php
-        }
-    } else {
-  ?>
+      }
+  } else {
+      ?>
 
 
 <main class="form-signup w-100 m-auto">
@@ -74,4 +135,5 @@
 	</form>
 </main>
 
-<?php } ?>
+<?php
+  }
