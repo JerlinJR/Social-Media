@@ -11,9 +11,11 @@ signup("jerlidn", "sdaf", "dsaf", "dsafsadfds");
 
 
 
-// $conn = Database::getConnection();
-// $conn = Database::getConnection();
+$conn = Database::getConnection();
+$conn = Database::getConnection();
+$conn = Database::getConnection();
 
 
 ?>
+
 </pre>
