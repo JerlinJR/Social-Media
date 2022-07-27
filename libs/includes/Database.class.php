@@ -21,13 +21,12 @@ class Database
             if ($connection->connect_error) {
                 die("Connection failed: " . $connection->connect_error);
             } else {
-                print("New connection");
-                
+                // print("\nNew connection\n");
                 Database::$conn = $connection;
                 return Database::$conn;
             }
         } else {
-            print("exixting conn");
+            // print("\nexixting conn\n");
             return Database::$conn;
         }
     }

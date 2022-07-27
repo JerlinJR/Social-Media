@@ -16,18 +16,31 @@ function validate_credentials($username, $password)
     }
 }
 
-
-function signup($user, $phone, $email, $pass)
+function signup($username, $password, $email, $phone)
 {
-    $conn = Database::getConnection();
-    $sql = "INSERT INTO `auth` (`id`, `username`, `password`, `email`, `phone`, `blocked`, `active`) 
-        VALUES (NULL, '$user', '$pass', '$email', '$phone', '0', '1');";
+    $servername = "mysql.selfmade.ninja";
+    $user_name = "Jerlin";
+    $pass_word = "7@XuGQYijiKBFWm";
+    $dbname = "Jerlin_app";
 
-    if ($conn->query($sql) === true) {
-        echo "New record created successfully";
-    } else {
-        echo "Error: " . $sql . "<br>" . $conn->error;
+    // Create connection
+    $conn = new mysqli($servername, $user_name, $pass_word, $dbname);
+    // Check connection
+    if ($conn->connect_error) {
+        die("Connection failed: " . $conn->connect_error);
     }
 
-    // $conn->close();
+    $sql = "INSERT INTO `auth` (`username`, `password`, `email`, `phone`, `blocked`, `active`)
+VALUES ('$username', '$password', '$email', '$phone', '0', '1');";
+
+    $error = false;
+    if($conn->query($sql) === true) {
+        $error = false;
+    } else {
+        echo "Error: " . $sql . "<br>" . $conn->error;
+        $error = $conn->error;
+ }
+
+    $conn->close();
+    return $error;
 }
