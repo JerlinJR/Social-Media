@@ -6,14 +6,12 @@ class Database
 
     public static function getConnection()
     {
-        // print("Entering to GetConnection()");
         if (Database::$conn == null) {
-            // print("Database conn null");
 
-            $servername = "localhost";
+            $servername = "mysql.selfmade.ninja";
             $user_name = "Jerlin";
-            $pass_word = "Jerlin@0853";
-            $dbname = "app";
+            $pass_word = "7@XuGQYijiKBFWm";
+            $dbname = "Jerlin_app";
      
             // Create connection
             $connection = new mysqli($servername, $user_name, $pass_word, $dbname);
@@ -21,12 +19,10 @@ class Database
             if ($connection->connect_error) {
                 die("Connection failed: " . $connection->connect_error);
             } else {
-                // print("\nNew connection\n");
                 Database::$conn = $connection;
                 return Database::$conn;
             }
         } else {
-            // print("\nexixting conn\n");
             return Database::$conn;
         }
     }
