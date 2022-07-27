@@ -1,6 +1,10 @@
 <?php
 
 include_once 'includes/Database.class.php';
+include_once 'includes/User.class.php';
+include_once 'includes/Session.class.php';
+
+Session::start();
 
 function load_template($name)
 {
@@ -9,17 +13,8 @@ function load_template($name)
 
 function validate_credentials($username, $password)
 {
-    $servername = "mysql.selfmade.ninja";
-    $user_name = "Jerlin";
-    $pass_word = "7@XuGQYijiKBFWm";
-    $dbname = "Jerlin_app";
+    $conn = Database::getConnection();
 
-    // Create connection
-    $conn = new mysqli($servername, $user_name, $pass_word, $dbname);
-    // Check connection
-    if ($conn->connect_error) {
-        die("Connection failed: " . $conn->connect_error);
-    }
     $sql = "SELECT `id`, `username`, `password`,`email` FROM `auth` WHERE username = '$username';";
     $result = $conn->query($sql);
 
@@ -44,17 +39,7 @@ function validate_credentials($username, $password)
 
 function signup($username, $password, $email, $phone)
 {
-    $servername = "mysql.selfmade.ninja";
-    $user_name = "Jerlin";
-    $pass_word = "7@XuGQYijiKBFWm";
-    $dbname = "Jerlin_app";
-
-    // Create connection
-    $conn = new mysqli($servername, $user_name, $pass_word, $dbname);
-    // Check connection
-    if ($conn->connect_error) {
-        die("Connection failed: " . $conn->connect_error);
-    }
+    $conn = Database::getConnection();
 
     $sql = "INSERT INTO `auth` (`username`, `password`, `email`, `phone`, `blocked`, `active`)
 VALUES ('$username', '$password', '$email', '$phone', '0', '1');";

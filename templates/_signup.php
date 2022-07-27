@@ -1,13 +1,13 @@
 <?php
 
 $signup = false;
-print_r($_POST);
+// print_r($_POST);
 if(!empty(isset($_POST['username'])) and !empty(isset($_POST['password'])) and !empty(isset($_POST['email'])) and !empty(isset($_POST['phone']))){
 	$username = $_POST['username'];
 	$password = $_POST['password'];
 	$email = $_POST['email'];
 	$phone = $_POST['phone'];
-    $error = signup($username, $password, $email, $phone);
+    $error = User::signup($username, $password, $email, $phone);
     $signup = true;
 
 }
