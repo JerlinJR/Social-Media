@@ -21,7 +21,7 @@ function validate_credentials($username, $password)
     $error = false;
     if ($result->num_rows > 0) {
         $row = mysqli_fetch_assoc($result);
-        if($row['username'] == $username and $row['password'] == $password){
+        if($row['password'] == $password){
             echo 'Login sucess';
             $error = false;
         } else {

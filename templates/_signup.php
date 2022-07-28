@@ -19,7 +19,7 @@ if($signup){
 		<main class="container">
 	<div class="bg-light p-5 rounded mt-3">
 		<h1>Signup sucess</h1>
-		<p class="lead">Login from <a href="app/login.php">here</a>.</p>
+		<p class="lead">Login from <a href="/login.php">here</a>.</p>
 	</div>
 </main>
 <?php
