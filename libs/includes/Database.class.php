@@ -7,7 +7,6 @@ class Database
     public static function getConnection()
     {
         if (Database::$conn == null) {
-
             $servername = "mysql.selfmade.ninja";
             $user_name = "Jerlin";
             $pass_word = "7@XuGQYijiKBFWm";
@@ -19,6 +18,7 @@ class Database
             if ($connection->connect_error) {
                 die("Connection failed: " . $connection->connect_error);
             } else {
+                echo "Database Connected";
                 Database::$conn = $connection;
                 return Database::$conn;
             }
