@@ -7,10 +7,10 @@ class Database
     public static function getConnection()
     {
         if (Database::$conn == null) {
-            $servername = "mysql.selfmade.ninja";
-            $user_name = "Jerlin";
-            $pass_word = "7@XuGQYijiKBFWm";
-            $dbname = "Jerlin_app";
+            $servername = get_config('db_server');
+            $user_name = get_config('db_username');
+            $pass_word = get_config('db_password');
+            $dbname = get_config('db_name');
      
             // Create connection
             $connection = new mysqli($servername, $user_name, $pass_word, $dbname);
@@ -18,11 +18,13 @@ class Database
             if ($connection->connect_error) {
                 die("Connection failed: " . $connection->connect_error);
             } else {
-                echo "Database Connected";
+                echo "Initial Database Connection";
                 Database::$conn = $connection;
                 return Database::$conn;
             }
         } else {
+            echo "Reusing Database Connection";
+
             return Database::$conn;
         }
     }

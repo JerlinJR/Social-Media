@@ -42,31 +42,31 @@ $object1 = new User($user);
 $object2 = new User($username);
 
 
-if ($object1) {
-    // print_r($object1->id);
-    echo "object1 = $object1->id"."\n";
-// print_r($object1->id);
-} else {
-    echo "Something went wrong"."\n";
-}
+// if ($object1) {
+//     // print_r($object1->id);
+//     echo "object1 = $object1->id"."\n";
+// // print_r($object1->id);
+// } else {
+//     echo "Something went wrong"."\n";
+// }
 
-if ($object2) {
-    // print_r($object2->id);
-    echo "object2 = $object2->id"."\n";
+// if ($object2) {
+//     // print_r($object2->id);
+//     echo "object2 = $object2->id"."\n";
     
 
-// print_r($object1->id);
-} else {
-    echo "Something went wrong"."\n";
-}
+// // print_r($object1->id);
+// } else {
+//     echo "Something went wrong"."\n";
+// }
 
 
 //----------------------- Working of getbio() and setbio()------------------------------
-// if ($object2->setbio("Updated Bsdfdasio")) {
-//     echo "sucess";
-// } else {
-//     echo 'failed';
-// }
+if ($object2->setbio("reUpdated Bsdfdasio")) {
+    echo "sucess";
+} else {
+    echo 'failed';
+}
 
 // if ($object2->getbio()) {
 //     echo $object2->getbio();
@@ -90,17 +90,17 @@ if ($object2) {
 
 //------------------- working with getfirstname() getsecondname()------------------------------
 
-if ($object2->setLastName("Updated firsftname")) {
-    echo "sucess";
-} else {
-    echo 'failed';
-}
+// if ($object2->setLastName("Updated firsftname")) {
+//     echo "sucess";
+// } else {
+//     echo 'failed';
+// }
 
-if ($object2->getLastName()) {
-    echo $object2->getLastName();
-} else {
-    echo "Nothing returned";
-}
+// if ($object2->getLastName()) {
+//     echo $object2->getLastName();
+// } else {
+//     echo "Nothing returned";
+// }
 
 
 

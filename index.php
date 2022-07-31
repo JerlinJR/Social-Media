@@ -1,5 +1,8 @@
 <?php
-include 'libs/load.php'
+include 'libs/load.php';
+print_r($_SERVER);
+
+
 ?>
 
 <!doctype html>
@@ -13,7 +16,7 @@ include 'libs/load.php'
 
 
 <body>
-
+	
 	<!-- Header -->
 
 	<?php load_template("_header");?>

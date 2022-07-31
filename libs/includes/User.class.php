@@ -53,12 +53,12 @@ class User
 
     public function __construct($username)
     {
-        $this->conn = Database::getConnection();
+        $conn = Database::getConnection();
 
         $this->username = $username;
 
         $this->sql = "SELECT * FROM `auth` WHERE `username` = '$this->username'";
-        $this->result = $this->conn->query($this->sql);
+        $this->result = $conn->query($this->sql);
 
         if ($this->result->num_rows == 1) {
             $this->row = $this->result->fetch_assoc();
@@ -71,241 +71,112 @@ class User
         // Exception for the username which is not found in database
     }
 
-    public function setbio($longText)
-    {
-        $this->$conn = Database::getConnection();
+    // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-        // $id = $this->id;
-        // echo $id;
-        $this->sql = "UPDATE users SET bio='$longText' WHERE id = $this->id;";
-        $this->result = $this->conn->query($this->sql);
-        if ($this->result == true) {
+
+    private function setData($name, $data)
+    {
+        if (!$this->conn) {
+            $this->conn = Database::getConnection();
+        }
+        $sql = "UPDATE `users` SET `$name` ='$data' WHERE `id` = $this->id";
+        if ($this->conn->query($sql)) {
             return true;
         } else {
-            // echo "Something went wrong,".$this->conn->error;
+            // echo "Error: " . $sql . "<br>" . $this->conn->error;
             return false;
         }
+    }
+
+    private function getData($name)
+    {
+        if (!$this->conn) {
+            $this->conn = Database::getConnection();
+        }
+        $sql = "SELECT `$name` FROM `users` WHERE `id` = '$this->id'";
+        $result = $this->conn->query($sql);
+        if ($result->num_rows) {
+            $row = $result->fetch_assoc()["$name"];
+            return $row;
+        } else {
+            return null;
+        }
+    }
+
+    // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+    public function setbio($bio)
+    {
+        return $this->setData('bio', $bio);
     }
 
     public function getbio()
     {
-        $this->conn = Database::getConnection();
-
-        $this->sql = "SELECT bio FROM users WHERE id = $this->id";
-        $this->result = $this->conn->query($this->sql);
-        if ($this->result->num_rows > 0) {
-            $this->row = $this->result->fetch_assoc();
-            return $this->row['bio'];
-        } else {
-            return false;
-        }
+        return $this->getData('bio');
     }
 
     public function getavatar()
     {
-        $this->$conn = Database::getConnection();
-        $this->sql = "SELECT avatar FROM users WHERE id = $this->id";
-        $this->result = $this->conn->query($this->sql);
-        if ($this->result->num_rows > 0) {
-            $this->row = $this->result->fetch_assoc();
-            // print_r($this->row);
-            return $this->row['avatar'];
-        } else {
-            return false;
-        }
+        return $this->getData('avatar');
     }
     
     public function setavatar($link)
     {
-        $this->$conn = Database::getConnection();
-
-        // $id = $this->id;
-        // echo $id;
-        $this->sql = "UPDATE users SET avatar = '$link' WHERE id = $this->id;";
-        $this->result = $this->conn->query($this->sql);
-        if ($this->result == true) {
-            return true;
-        } else {
-            // echo "Something went wrong,".$this->conn->error;
-            return false;
-        }
+        return $this->setData('avatar',$link);
     }
     public function getFirstName()
     {
-        $this->conn = Database::getConnection();
-
-        $this->sql = "SELECT firstname FROM users WHERE id = $this->id";
-        $this->result = $this->conn->query($this->sql);
-        if ($this->result->num_rows > 0) {
-            $this->row = $this->result->fetch_assoc();
-            // print_r($this->row);
-            return $this->row['firstname'];
-        } else {
-            return false;
-        }
+        return $this->getData('firstname');
     }
     public function setFirstName($firstname)
     {
-        $this->$conn = Database::getConnection();
+        return $this->setData('firstname',$firstname);
 
-        // $id = $this->id;
-        // echo $id;
-        $this->sql = "UPDATE users SET firstname='$firstname' WHERE id = $this->id;";
-        $this->result = $this->conn->query($this->sql);
-        if ($this->result == true) {
-            return true;
-        } else {
-            // echo "Something went wrong,".$this->conn->error;
-            return false;
-        }
     }
 
     public function getLastName()
     {
-        $this->conn = Database::getConnection();
-
-        $this->sql = "SELECT lastname FROM users WHERE id = $this->id";
-        $this->result = $this->conn->query($this->sql);
-        if ($this->result->num_rows > 0) {
-            $this->row = $this->result->fetch_assoc();
-            // print_r($this->row);
-            return $this->row['lastname'];
-        } else {
-            return false;
-        }
+        return $this->getData('lastname');
     }
     public function setLastName($lastname)
     {
-        $this->$conn = Database::getConnection();
-
-        // $id = $this->id;
-        // echo $id;
-        $this->sql = "UPDATE users SET lastname='$lastname' WHERE id = $this->id;";
-        $this->result = $this->conn->query($this->sql);
-        if ($this->result == true) {
-            return true;
-        } else {
-            // echo "Something went wrong,".$this->conn->error;
-            return false;
-        }
+        return $this->setData('lastname',$lastname);
     }
 
     public function getdob()
     {
-        $this->conn = Database::getConnection();
-
-        $this->sql = "SELECT dob FROM users WHERE id = $this->id";
-        $this->result = $this->conn->query($this->sql);
-        if ($this->result->num_rows > 0) {
-            $this->row = $this->result->fetch_assoc();
-            return $this->row['dob'];
-        } else {
-            return false;
-        }
+        return $this->getData('dob');
     }
 
 
     // Need to be checked
     public function setdob($date)
     {
-        $this->$conn = Database::getConnection();
-
-        // $id = $this->id;
-        // echo $id;
-        
-        if (strtotime($date) > strtotime(0)) {
-            $this->sql = "UPDATE users SET dob='$date' WHERE id = $this->id;";
-            $this->result = $this->conn->query($this->sql);
-            if ($this->result == true) {
-                return true;
-            } else {
-                // echo "Something went wrong,".$this->conn->error;
-                return false;
-            }
-        }
+        return $this->setData('dob',$date);
     }
     public function getInstagramLink()
     {
-        $this->conn = Database::getConnection();
-
-        $this->sql = "SELECT instagram FROM users WHERE id = $this->id";
-        $this->result = $this->conn->query($this->sql);
-        if ($this->result->num_rows > 0) {
-            $this->row = $this->result->fetch_assoc();
-            return $this->row['instagram'];
-        } else {
-            return false;
-        }
+        return $this->getData('instagram');
     }
     public function setInstagramLink($instagramLink)
     {
-        $this->$conn = Database::getConnection();
-
-        // $id = $this->id;
-        // echo $id;
-        $this->sql = "UPDATE users SET instagram='$instagramLink' WHERE id = $this->id;";
-        $this->result = $this->conn->query($this->sql);
-        if ($this->result == true) {
-            return true;
-        } else {
-            // echo "Something went wrong,".$this->conn->error;
-            return false;
-        }
+        return $this->setData('instagram', $instagramLink);
     }
     public function getFacebookLink()
     {
-        $this->conn = Database::getConnection();
-
-        $this->sql = "SELECT facebook FROM users WHERE id = $this->id";
-        $this->result = $this->conn->query($this->sql);
-        if ($this->result->num_rows > 0) {
-            $this->row = $this->result->fetch_assoc();
-            return $this->row['facebook'];
-        } else {
-            return false;
-        }
+        return $this->getData('facebook');
     }
     public function setFacebookLink($facebookLink)
     {
-        $this->$conn = Database::getConnection();
-
-        // $id = $this->id;
-        // echo $id;
-        $this->sql = "UPDATE users SET facebook='$facebookLink' WHERE id = $this->id;";
-        $this->result = $this->conn->query($this->sql);
-        if ($this->result == true) {
-            return true;
-        } else {
-            // echo "Something went wrong,".$this->conn->error;
-            return false;
-        }
+        return $this->setData('facebook', $facebookLink);
     }
     public function getTwitterLink()
     {
-        $this->conn = Database::getConnection();
-
-        $this->sql = "SELECT twitter FROM users WHERE id = $this->id";
-        $this->result = $this->conn->query($this->sql);
-        if ($this->result->num_rows > 0) {
-            $this->row = $this->result->fetch_assoc();
-            return $this->row['twitter'];
-        } else {
-            return false;
-        }
+        return $this->getData('twitter');
     }
     public function setTwitterLink($twitterLink)
     {
-        $this->$conn = Database::getConnection();
-
-        // $id = $this->id;
-        // echo $id;
-        $this->sql = "UPDATE users SET twitter='$twitterLink' WHERE id = $this->id;";
-        $this->result = $this->conn->query($this->sql);
-        if ($this->result == true) {
-            return true;
-        } else {
-            // echo "Something went wrong,".$this->conn->error;
-            return false;
-        }
+        return $this->setData('twitter', $twitterLink);
     }
 }
+
