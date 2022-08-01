@@ -4,6 +4,18 @@ class User
 {
     private $conn;
 
+    public function __call($name, $arguments)
+    {
+        $property = preg_replace("/[^0-9a-zA-Z]/", "", substr($name, 3));
+        $property = strtolower(preg_replace('/\B([A-Z])/', '_$1', $property));
+
+        if (substr($name, 0, 3) == 'get') {
+            return $this->_get_data($property);
+        } elseif (substr($name, 0, 3) == 'set') {
+            return $this->_set_data($name, $arguments[0]);
+        }
+    }
+
 
     public static function signup($username, $password, $email, $phone)
     {
@@ -40,7 +52,7 @@ class User
             if (password_verify($password, $row['password'])) {
                 // echo "password verifying...";
                 // print_r($row);
-                return $row;
+                return $row['username'];
             // echo "Row returned";
             } else {
                 return false;
@@ -53,28 +65,33 @@ class User
 
     public function __construct($username)
     {
-        $conn = Database::getConnection();
-
-        $this->username = $username;
-
-        $this->sql = "SELECT * FROM `auth` WHERE `username` = '$this->username'";
-        $this->result = $conn->query($this->sql);
-
-        if ($this->result->num_rows == 1) {
-            $this->row = $this->result->fetch_assoc();
-            $this->id = $this->row['id'];
-        // return $this->row;
-        } else {
-            throw new Exception('User not found,Try to signup..');
+        if (!$this->conn) {
+            $this->conn = Database::getConnection();
         }
 
-        // Exception for the username which is not found in database
+        $this->username = $username;
+        // echo "Username :" .$this->username."\n";
+        // print("Username : $this->username");
+        $sql = "SELECT `id` FROM `auth` WHERE `username` = '$this->username'";
+        $result = $this->conn->query($sql);
+
+        if ($result->num_rows == 1) {
+            $row = $result->fetch_assoc();
+            $this->id = $row['id'];
+            // echo "ID : ".$this->id."\n";
+            return $this->id;
+        } else {
+            echo "User not found";
+            echo "Error: " . $sql . "<br>" . $this->conn->error;
+            // throw new Exception('User not found,Try to signup..');
+        }
+        
     }
 
     // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 
-    private function setData($name, $data)
+    private function _set_data($name, $data)
     {
         if (!$this->conn) {
             $this->conn = Database::getConnection();
@@ -82,13 +99,14 @@ class User
         $sql = "UPDATE `users` SET `$name` ='$data' WHERE `id` = $this->id";
         if ($this->conn->query($sql)) {
             return true;
+            echo "Data Insertedd";
         } else {
-            // echo "Error: " . $sql . "<br>" . $this->conn->error;
+            echo "Error: " . $sql . "<br>" . $this->conn->error;
             return false;
         }
     }
 
-    private function getData($name)
+    private function _get_data($name)
     {
         if (!$this->conn) {
             $this->conn = Database::getConnection();
@@ -99,84 +117,88 @@ class User
             $row = $result->fetch_assoc()["$name"];
             return $row;
         } else {
+            echo "Error: " . $sql . "<br>" . $this->conn->error;
             return null;
+        }
+    }
+    public function setdob($date)
+    {
+        if (checkdate($year, $month, $day)) {
+            return $this->_set_data('dob', $date);
+        } else {
+            return false;
         }
     }
 
     // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-    public function setbio($bio)
-    {
-        return $this->setData('bio', $bio);
-    }
+//     public function setbio($bio)
+//     {
+//         return $this->_set_data('bio', $bio);
+//     }
 
-    public function getbio()
-    {
-        return $this->getData('bio');
-    }
+//     public function getbio()
+//     {
+//         return $this->_get_data('bio');
+//     }
 
-    public function getavatar()
-    {
-        return $this->getData('avatar');
-    }
+//     public function getavatar()
+//     {
+//         return $this->_get_data('avatar');
+//     }
     
-    public function setavatar($link)
-    {
-        return $this->setData('avatar',$link);
-    }
-    public function getFirstName()
-    {
-        return $this->getData('firstname');
-    }
-    public function setFirstName($firstname)
-    {
-        return $this->setData('firstname',$firstname);
+//     public function setavatar($link)
+//     {
+//         return $this->_set_data('avatar', $link);
+//     }
+//     public function getFirstName()
+//     {
+//         return $this->_get_data('firstname');
+//     }
+//     public function setFirstName($firstname)
+//     {
+//         return $this->_set_data('firstname', $firstname);
+//     }
 
-    }
+//     public function getLastName()
+//     {
+//         return $this->_get_data('lastname');
+//     }
+//     public function setLastName($lastname)
+//     {
+//         return $this->_set_data('lastname', $lastname);
+//     }
 
-    public function getLastName()
-    {
-        return $this->getData('lastname');
-    }
-    public function setLastName($lastname)
-    {
-        return $this->setData('lastname',$lastname);
-    }
-
-    public function getdob()
-    {
-        return $this->getData('dob');
-    }
+//     public function getdob()
+//     {
+//         return $this->_get_data('dob');
+//     }
 
 
-    // Need to be checked
-    public function setdob($date)
-    {
-        return $this->setData('dob',$date);
-    }
-    public function getInstagramLink()
-    {
-        return $this->getData('instagram');
-    }
-    public function setInstagramLink($instagramLink)
-    {
-        return $this->setData('instagram', $instagramLink);
-    }
-    public function getFacebookLink()
-    {
-        return $this->getData('facebook');
-    }
-    public function setFacebookLink($facebookLink)
-    {
-        return $this->setData('facebook', $facebookLink);
-    }
-    public function getTwitterLink()
-    {
-        return $this->getData('twitter');
-    }
-    public function setTwitterLink($twitterLink)
-    {
-        return $this->setData('twitter', $twitterLink);
-    }
+//     // Need to be checked
+
+//     public function getInstagramLink()
+//     {
+//         return $this->_get_data('instagram');
+//     }
+//     public function setInstagramLink($instagramLink)
+//     {
+//         return $this->_set_data('instagram', $instagramLink);
+//     }
+//     public function getFacebookLink()
+//     {
+//         return $this->_get_data('facebook');
+//     }
+//     public function setFacebookLink($facebookLink)
+//     {
+//         return $this->_set_data('facebook', $facebookLink);
+//     }
+//     public function getTwitterLink()
+//     {
+//         return $this->_get_data('twitter');
+//     }
+//     public function setTwitterLink($twitterLink)
+//     {
+//         return $this->_set_data('twitter', $twitterLink);
+//     }
 }
-

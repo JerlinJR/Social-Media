@@ -18,12 +18,12 @@ class Database
             if ($connection->connect_error) {
                 die("Connection failed: " . $connection->connect_error);
             } else {
-                echo "Initial Database Connection";
+                // echo "Initial Database Connection";
                 Database::$conn = $connection;
                 return Database::$conn;
             }
         } else {
-            echo "Reusing Database Connection";
+            // echo "Reusing Database Connection";
 
             return Database::$conn;
         }
