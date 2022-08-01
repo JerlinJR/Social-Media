@@ -11,9 +11,9 @@ include 'libs/load.php';
 // $conn = Database::getConnection();
 
 
-$user = "admin";
+$user = "Jerlin";
 // $pass = "1";
-$username ="Jerlin";
+// $username ="Jerlin";
 
 
 //create function with an exception
@@ -39,73 +39,17 @@ $username ="Jerlin";
 // $result = User::__construct($user);
 
 $object1 = new User($user);
-$object2 = new User($username);
+// $object2 = new User($username);
 
+print($object1->getBio());
+print($object1->getFirstname());
+$a = $object1->setBio('bio',"__call function implementation");
 
-// if ($object1) {
-//     // print_r($object1->id);
-//     echo "object1 = $object1->id"."\n";
-// // print_r($object1->id);
-// } else {
-//     echo "Something went wrong"."\n";
-// }
-
-// if ($object2) {
-//     // print_r($object2->id);
-//     echo "object2 = $object2->id"."\n";
-    
-
-// // print_r($object1->id);
-// } else {
-//     echo "Something went wrong"."\n";
-// }
-
-
-//----------------------- Working of getbio() and setbio()------------------------------
-if ($object2->setbio("reUpdated Bsdfdasio")) {
-    echo "sucess";
+if($a){
+echo "sucess";
 } else {
-    echo 'failed';
+echo "Failed";
 }
-
-// if ($object2->getbio()) {
-//     echo $object2->getbio();
-// } else {
-//     echo "Nothing returned";
-// }
-
-//------------------Working of getavatar() and setavatar()--------------------------------
-
-// if ($object2->setavatar("Updated avatar")) {
-//     echo "sucess";
-// } else {
-//     echo 'failed';
-// }
-
-// if ($object2->getavatar()) {
-//     echo $object2->getavatar();
-// } else {
-//     echo "Nothing returned";
-// }
-
-//------------------- working with getfirstname() getsecondname()------------------------------
-
-// if ($object2->setLastName("Updated firsftname")) {
-//     echo "sucess";
-// } else {
-//     echo 'failed';
-// }
-
-// if ($object2->getLastName()) {
-//     echo $object2->getLastName();
-// } else {
-//     echo "Nothing returned";
-// }
-
-
-
-
-
 
 
 
