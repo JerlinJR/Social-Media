@@ -27,21 +27,32 @@ if (Session::get('isLoggedIn')) {
     $username = Session::get('session_username');
     $userobj =  new User($username);
     // printf("Welcome Back, $userdata[username]");
-    printf("Welcome Back, ".$userobj->getFirstname());
+    printf("Welcome Back, ".$userobj->getFirstname()."\n");
+    printf("Bio, ".$userobj->getBio()."\n");
+    printf("avatar, ".$userobj->getAvatar()."\n");
+
+
+
+    $a = $userobj->setAvatar("New Avatar");
+    if ($a) {
+        echo "sucess";
+    } else {
+        echo "Failde";
+    }
 } else {
     printf("No session found, trying to login now");
     $result = User::login($user, $pass);
     if ($result) {
         $userobj =  new User($user);
 
-        // print_r($userobj); 
-        echo "Login Sucess," .$userobj->getBio();
+        // print_r($userobj);
+        echo "Login Sucess," .$userobj->getFirstname();
         Session::set('isLoggedIn', true);
         Session::set('session_username', $result);
     } else {
         echo "Login Failed,$user <br>";
     }
-} 
+}
 
 echo <<<EOL
 <br><br><a href="logintest.php?logout">Logout</a>

@@ -39,17 +39,19 @@ $user = "Jerlin";
 // $result = User::__construct($user);
 
 $object1 = new User($user);
+
+$object1->Thisoisafunction();
 // $object2 = new User($username);
 
-print($object1->getBio());
-print($object1->getFirstname());
-$a = $object1->setBio('bio',"__call function implementation");
+// print($object1->getBio());
+// print($object1->getFirstname());
+// $a = $object1->setBio("Reset BIo");
 
-if($a){
-echo "sucess";
-} else {
-echo "Failed";
-}
+// if ($a) {
+//     echo "sucess";
+// } else {
+//     echo "Failed";
+// }
 
 
 

@@ -12,7 +12,34 @@ class User
         if (substr($name, 0, 3) == 'get') {
             return $this->_get_data($property);
         } elseif (substr($name, 0, 3) == 'set') {
-            return $this->_set_data($name, $arguments[0]);
+            $value = strtolower(substr("$name", 3, strlen($name)-3));
+            return $this->_set_data($value, $arguments[0]);
+        // return $this->_set_data($value);
+        } else {
+            // print("User::__call() -> $name");
+            throw new Exception("User::__call() -> $name, function unavaliable");
+        }
+    }
+
+    public function __construct($username)
+    {
+        if (!$this->conn) {
+            $this->conn = Database::getConnection();
+        }
+
+        $this->username = $username;
+        $sql = "SELECT `id` FROM `auth` WHERE `username` OR `id` = `$username` = '$this->username'";
+        $result = $this->conn->query($sql);
+
+        if ($result->num_rows == 1) {
+            $row = $result->fetch_assoc();
+            $this->id = $row['id'];
+            // echo "ID : ".$this->id."\n";
+            return $this->id;
+        } else {
+            echo "User not found";
+            echo "Error: " . $sql . "<br>" . $this->conn->error;
+            // throw new Exception('User not found,Try to signup..');
         }
     }
 
@@ -63,30 +90,7 @@ class User
         }
     }
 
-    public function __construct($username)
-    {
-        if (!$this->conn) {
-            $this->conn = Database::getConnection();
-        }
 
-        $this->username = $username;
-        // echo "Username :" .$this->username."\n";
-        // print("Username : $this->username");
-        $sql = "SELECT `id` FROM `auth` WHERE `username` = '$this->username'";
-        $result = $this->conn->query($sql);
-
-        if ($result->num_rows == 1) {
-            $row = $result->fetch_assoc();
-            $this->id = $row['id'];
-            // echo "ID : ".$this->id."\n";
-            return $this->id;
-        } else {
-            echo "User not found";
-            echo "Error: " . $sql . "<br>" . $this->conn->error;
-            // throw new Exception('User not found,Try to signup..');
-        }
-        
-    }
 
     // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -96,10 +100,17 @@ class User
         if (!$this->conn) {
             $this->conn = Database::getConnection();
         }
+        print($this->id."\n");
+
         $sql = "UPDATE `users` SET `$name` ='$data' WHERE `id` = $this->id";
+
+        print($sql."\n");
+        print($this->id."\n");
+
         if ($this->conn->query($sql)) {
-            return true;
             echo "Data Insertedd";
+
+            return true;
         } else {
             echo "Error: " . $sql . "<br>" . $this->conn->error;
             return false;
@@ -146,7 +157,7 @@ class User
 //     {
 //         return $this->_get_data('avatar');
 //     }
-    
+
 //     public function setavatar($link)
 //     {
 //         return $this->_set_data('avatar', $link);
@@ -173,6 +184,9 @@ class User
 //     {
 //         return $this->_get_data('dob');
 //     }
+
+
+
 
 
 //     // Need to be checked
