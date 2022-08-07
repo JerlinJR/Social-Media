@@ -12,11 +12,8 @@ class User
         if (substr($name, 0, 3) == 'get') {
             return $this->_get_data($property);
         } elseif (substr($name, 0, 3) == 'set') {
-            $value = strtolower(substr("$name", 3, strlen($name)-3));
-            return $this->_set_data($value, $arguments[0]);
-        // return $this->_set_data($value);
+            return $this->_set_data($property, $arguments[0]);
         } else {
-            // print("User::__call() -> $name");
             throw new Exception("User::__call() -> $name, function unavaliable");
         }
     }
@@ -28,7 +25,8 @@ class User
         }
 
         $this->username = $username;
-        $sql = "SELECT `id` FROM `auth` WHERE `username` OR `id` = `$username` = '$this->username'";
+        $sql = "SELECT `id` FROM `auth` WHERE `username`= '$username' OR `id` = '$username' LIMIT 1";
+        // echo $sql;
         $result = $this->conn->query($sql);
 
         if ($result->num_rows == 1) {
@@ -37,7 +35,7 @@ class User
             // echo "ID : ".$this->id."\n";
             return $this->id;
         } else {
-            echo "User not found";
+            // echo "User not found";
             echo "Error: " . $sql . "<br>" . $this->conn->error;
             // throw new Exception('User not found,Try to signup..');
         }

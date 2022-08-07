@@ -2,6 +2,31 @@
 
 class UserSession
 {
+    private $conn;
+
+    public function __construct($id)
+    {
+        if (!$this->conn) {
+            $this->conn = Database::getConnection();
+        }
+        $this->id = $id;
+        $this->data = null;
+        $sql = "SELECT * FROM `session` WHERE `uid` = $id";
+        $result = $this->conn->query($sql);
+
+        if ($result->num_rows == 1) {
+            $row = $result->fetch_assoc();
+            $this->data = $row;
+            // print_r($this->data = $row);
+            $this->uid = $row['uid'];
+            $this->token = $row['token'];
+            return $this->id;
+        } else {
+            echo "Error: " . $sql . "<br>" . $this->conn->error;
+            throw new Exception('Session is invalid');
+        }
+    }
+
     public static function authenticate($user, $pass)
     {
         $username = User::login($user, $pass);
@@ -13,7 +38,7 @@ class UserSession
             $token = md5(rand(0, 999999) .$ip.$user_agent.time());
             $sql = "INSERT INTO `session` (`uid`, `token`, `login_time`, `ip`, `user_agent`, `active`)
             VALUES ('$user->id', '$token', now(), '$ip', '$user_agent', '1');";
-            if($conn->query($sql)) {
+            if ($conn->query($sql)) {
                 Session::set('session_token', $token);
                 return $token;
             } else {
@@ -23,23 +48,28 @@ class UserSession
             return false;
         }
     }
-    public function __construct($id)
+
+    public function isValid()
     {
-        if (!$this->conn) {
-            $this->conn = Database::getConnection();
-        }
-        $this->id = $id;
-        $this->data = null;
-        $sql = "SELECT * FROM `session` WHERE `$id` = '$this->id'";
+        $id = $this->id;
+        // $sql = "SELECT * FROM `session` WHERE `uid` = $id";
+        $sql = "SELECT DATE(login_time) as mydate, TIME(login_time) as mytime FROM `session`";
+
         $result = $this->conn->query($sql);
 
         if ($result->num_rows == 1) {
             $row = $result->fetch_assoc();
-            $this->data = $row;
-            $this->uid = $row['uid'];
-            return $this->id;
+            // echo $row['login_time'];
+            // echo $row['mydate'];
+            echo "\n".$row['mytime'];
+            $as = strtotime('+ 30 minute', strtotime($row['mytime']));
+
+            echo $as;
+
+
+        // echo date('H:i:s', $row['login_time']);
         } else {
-            throw new Exception('Session is invalid');
+            echo "Error: " . $sql . "<br>" . $this->conn->error;
         }
     }
 }

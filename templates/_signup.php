@@ -2,40 +2,40 @@
 
 $signup = false;
 // print_r($_POST);
-if(!empty(isset($_POST['username'])) and !empty(isset($_POST['password'])) and !empty(isset($_POST['email'])) and !empty(isset($_POST['phone']))){
-	$username = $_POST['username'];
-	$password = $_POST['password'];
-	$email = $_POST['email'];
-	$phone = $_POST['phone'];
+if (!empty(isset($_POST['username'])) and !empty(isset($_POST['password'])) and !empty(isset($_POST['email'])) and !empty(isset($_POST['phone']))) {
+    $username = $_POST['username'];
+    $password = $_POST['password'];
+    $email = $_POST['email'];
+    $phone = $_POST['phone'];
     $error = User::signup($username, $password, $email, $phone);
     $signup = true;
-
 }
 ?>
-<?php 
-if($signup){
-	if(!$error){
-		?>
-		<main class="container">
+<?php
+if ($signup) {
+    if (!$error) {
+        ?>
+<main class="container">
 	<div class="bg-light p-5 rounded mt-3">
 		<h1>Signup sucess</h1>
 		<p class="lead">Login from <a href="/login.php">here</a>.</p>
 	</div>
 </main>
 <?php
-	} else {
-?>
+    } else {
+        ?>
 <main class="container">
 	<div class="bg-light p-5 rounded mt-3">
 		<h1>Signup fail</h1>
-		<p class="lead">Something went wrong, <?=$error?></p>
+		<p class="lead">Something went wrong, <?=$error?>
+		</p>
 	</div>
 </main>
 
 <?php
-	}
+    }
 } else {
-?>
+    ?>
 <main class="form-signup w-100 m-auto">
 	<form action="signup.php" method="post">
 		<img class="mb-4" src="/docs/5.2/assets/brand/bootstrap-logo.svg" alt="" width="72" height="57">
@@ -71,5 +71,3 @@ if($signup){
 </main>
 <?php
 }
-
-?>

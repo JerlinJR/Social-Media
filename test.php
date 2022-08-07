@@ -11,9 +11,13 @@ include 'libs/load.php';
 // $conn = Database::getConnection();
 
 
-$user = "Jerlin";
-// $pass = "1";
+$user = "admin";
+$pass = "1";
 // $username ="Jerlin";
+
+
+// $result = UserSession
+
 
 
 //create function with an exception
@@ -38,9 +42,9 @@ $user = "Jerlin";
 
 // $result = User::__construct($user);
 
-$object1 = new User($user);
+// $object1 = new User($user);
 
-$object1->Thisoisafunction();
+// $object1->Thisoisafunction();
 // $object2 = new User($username);
 
 // print($object1->getBio());
