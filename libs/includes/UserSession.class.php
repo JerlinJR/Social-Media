@@ -11,7 +11,7 @@ class UserSession
         }
         $this->id = $id;
         $this->data = null;
-        $sql = "SELECT * FROM `session` WHERE `uid` = $id";
+        $sql = "SELECT * FROM `session` WHERE `uid` = $id LIMIT 1";
         $result = $this->conn->query($sql);
 
         if ($result->num_rows == 1) {
@@ -30,8 +30,8 @@ class UserSession
     public static function authenticate($user, $pass)
     {
         $username = User::login($user, $pass);
-        $user = new User($username);
         if ($username) {
+            $user = new User($username);
             $conn = Database::getConnection();
             $ip = $_SERVER['REMOTE_ADDR'];
             $user_agent = $_SERVER['HTTP_USER_AGENT'];
@@ -49,27 +49,80 @@ class UserSession
         }
     }
 
+    public static function authorize($token){
+        try{
+            $session = new UserSession($token);
+            if(isset($_SERVER['REMOTE_ADDR']) and isset($_SERVER['HTTP_USER_AGENT'])){
+                if($session->isValid() and $session->isActive()){
+                    if($_SERVER['REMOTE_ADDR'] == $session->getIP()){
+                        if($_SERVER['HTTP_USER_AGENT'] == $session->getUserAgent()){
+                            return true;
+                        } else {
+                            throw new Exception("User Agent does'nt matched")
+                        }
+                    } else {
+                        throw new Exception("IP Adress does'nt matched");
+                    }
+                } else {
+                    throw new Exception("Invalid Session");
+                }
+
+
+            } else {
+                throw new Exception("UserAgent and IP Address are empty");
+            }
+            catch (Exception $e){
+                return false;
+            }
+
+        }
+
+    }
+
+
     public function isValid()
     {
-        $id = $this->id;
-        // $sql = "SELECT * FROM `session` WHERE `uid` = $id";
-        $sql = "SELECT DATE(login_time) as mydate, TIME(login_time) as mytime FROM `session`";
 
-        $result = $this->conn->query($sql);
-
-        if ($result->num_rows == 1) {
-            $row = $result->fetch_assoc();
-            // echo $row['login_time'];
-            // echo $row['mydate'];
-            echo "\n".$row['mytime'];
-            $as = strtotime('+ 30 minute', strtotime($row['mytime']));
-
-            echo $as;
-
-
-        // echo date('H:i:s', $row['login_time']);
+        if(isset($this->data['login_time'])){
+            $login_time = DateTime::createFromFormat('Y-m-d H:i:s', $this->data['login_time']);
+            if (3600 > time() - $login_time->getTimestamp()) {
+                return true;
+            } else {
+                return false;
+            }
         } else {
-            echo "Error: " . $sql . "<br>" . $this->conn->error;
+            throw new Exception("Invalid Login");
+        }
+
+    }
+
+    public function isActive(){
+        if(isset($this->data['active'])){
+            return $this->data['active'] ? true : false;
         }
     }
+
+    public function getIp(){
+        if(isset($this->data['ip'])){
+            return $this->data['ip'];
+        } else {
+            return false;
+        }
+    }
+
+    public function getUserAgent(){
+        if(isset($this->data['user_agent'])){
+            return $this->data['user_agent'];
+        } else {
+            return false;
+        }
+    }
+
+
+
+
+
+
+
+
 }
