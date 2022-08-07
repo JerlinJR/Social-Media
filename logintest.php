@@ -23,32 +23,28 @@ if (isset($_GET['logout'])) {
 }
 
 $result = null;
-if (Session::get('isLoggedIn')) {
+if (Session::get('session_token')) {
     $username = Session::get('session_username');
     $userobj =  new User($username);
-    // printf("Welcome Back, $userdata[username]");
     printf("Welcome Back, ".$userobj->getFirstname()."\n");
-    printf("Bio, ".$userobj->getBio()."\n");
-    printf("avatar, ".$userobj->getAvatar()."\n");
-
-
-
-    $a = $userobj->setAvatar("New Avatar");
-    if ($a) {
-        echo "sucess";
-    } else {
-        echo "Failde";
-    }
+    // $user_session = new UserSession($userobj->id);
+    $id = $userobj->id;
+    $user_session = new UserSession($id);
+    echo $user_session->token;
+    echo $user_session->isValid();
 } else {
     printf("No session found, trying to login now");
-    $result = User::login($user, $pass);
+    $result = UserSession::authenticate($user, $pass);
+
     if ($result) {
         $userobj =  new User($user);
-
         // print_r($userobj);
-        echo "Login Sucess," .$userobj->getFirstname();
-        Session::set('isLoggedIn', true);
-        Session::set('session_username', $result);
+        echo "Login Sucess," .$userobj->getFirstname()."\n";
+        echo "Your token is :" . $result."\n";
+        Session::set('session_token', $result);
+        Session::set('session_username', $userobj->username);
+        echo "This is session_username : ".Session::get('session_username');
+    // echo $userobj->username;
     } else {
         echo "Login Failed,$user <br>";
     }

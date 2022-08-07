@@ -19,7 +19,8 @@ function isDate($value)
 
 // isDate(25/10/2002);
 
-function filter_mydate($s) {
+function filter_mydate($s)
+{
     if (preg_match('@^(\d\d\d\d)-(\d\d)-(\d\d) (\d\d):(\d\d):(\d\d)$@', $s, $m) == false) {
         return false;
     }
@@ -38,9 +39,9 @@ $date = '2522/12/20';
 //     echo "not valid";
 // }
 
-if (strtotime($date) > strtotime(0)) {
-    echo 'it is a date';
-}
+// if (strtotime($date) > strtotime(0)) {
+//     echo 'it is a date';
+// }
 
 
 ?>
