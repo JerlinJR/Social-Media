@@ -84,6 +84,7 @@ class UserSession
             if (3600 > time() - $login_time->getTimestamp()) {
                 return true;
             } else {
+                // return $this->removeSession();
                 return false;
             }
         } else {
