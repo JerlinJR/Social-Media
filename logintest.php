@@ -36,9 +36,13 @@ $result = null;
 if (Session::get('session_token')) {
     if(UserSession::authorize(Session::get('session_token'))){
         echo "Welcome Back , $user";
+        // echo Session::get('session_token');
     } else {
+        $session_obj = new UserSession(Session::get('session_token'));
+        if($session_obj->removeSession()){
         Session::destroy();
-        die("Invalid Session, <a href='logintest.php'>Login Again</a>");
+        }
+        die("Sorry,Session Timed Out, <a href='logintest.php'>Login Again</a>");
     }
 
 } else {
