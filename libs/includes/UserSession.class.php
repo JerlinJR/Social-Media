@@ -4,25 +4,22 @@ class UserSession
 {
     private $conn;
 
-    public function __construct($id)
+    public function __construct($token)
     {
-        if (!$this->conn) {
-            $this->conn = Database::getConnection();
-        }
-        $this->id = $id;
+        
+        $this->conn = Database::getConnection();
+        $this->token = $token;
         $this->data = null;
-        $sql = "SELECT * FROM `session` WHERE `uid` = $id LIMIT 1";
-        $result = $this->conn->query($sql);
+        $sql = "SELECT * FROM `session` WHERE `token` = '$token' LIMIT 1";
 
+        $result = $this->conn->query($sql);
         if ($result->num_rows == 1) {
             $row = $result->fetch_assoc();
             $this->data = $row;
             // print_r($this->data = $row);
             $this->uid = $row['uid'];
-            $this->token = $row['token'];
-            return $this->id;
         } else {
-            echo "Error: " . $sql . "<br>" . $this->conn->error;
+            echo "Error: " . $sql . "<br>" . $this->conn->error."\n";
             throw new Exception('Session is invalid');
         }
     }
@@ -58,7 +55,7 @@ class UserSession
                         if($_SERVER['HTTP_USER_AGENT'] == $session->getUserAgent()){
                             return true;
                         } else {
-                            throw new Exception("User Agent does'nt matched")
+                            throw new Exception("User Agent does'nt matched");
                         }
                     } else {
                         throw new Exception("IP Adress does'nt matched");
@@ -71,10 +68,9 @@ class UserSession
             } else {
                 throw new Exception("UserAgent and IP Address are empty");
             }
-            catch (Exception $e){
-                return false;
-            }
-
+        }
+        catch (Exception $e){
+            return false;
         }
 
     }
@@ -118,9 +114,19 @@ class UserSession
         }
     }
 
-
-
-
+    public function removeSession(){
+        if(Session::get('session_token')){
+            if(!$this->conn){
+                $this->conn = Database::getConnection();
+            }
+            $sql = "DELETE FROM `session` WHERE `uid` = $this->uid";
+            if($this->conn->query($sql)){
+                return true;
+            }
+        } else {
+            return false;
+        }
+    }
 
 
 
