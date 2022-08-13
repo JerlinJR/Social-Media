@@ -11,9 +11,9 @@
 
 
 	<!-- Bootstrap core CSS -->
-	<link href="/app/assets/dist/css/bootstrap.min.css" rel="stylesheet">
-	<?if (file_exists($_SERVER["DOCUMENT_ROOT"].'/app/css/'.basename($_SERVER['PHP_SELF'],".php").".css")) {?>
-	<link rel="stylesheet" href="/app/css/<?=basename($_SERVER['PHP_SELF'],".php")?>.css">
+	<link href="<?=get_config('base_path')?>assets/dist/css/bootstrap.min.css" rel="stylesheet">
+	<?if (file_exists($_SERVER["DOCUMENT_ROOT"].get_config('base_path').'css/'.basename($_SERVER['PHP_SELF'],".php").".css")) {?>
+	<link rel="stylesheet" href="<?=get_config('base_path')?>css/<?=basename($_SERVER['PHP_SELF'],".php")?>.css">
 	<? } ?>
 	<style>
 		.bd-placeholder-img {

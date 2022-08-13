@@ -26,7 +26,7 @@ function get_config($key, $default=null)
 
 function load_template($name)
 {
-    include $_SERVER['DOCUMENT_ROOT'] . "/app/templates/$name.php";
+    include $_SERVER['DOCUMENT_ROOT'] .get_config('base_path')."templates/$name.php";
 }
 
 function validate_credentials($username, $password)
