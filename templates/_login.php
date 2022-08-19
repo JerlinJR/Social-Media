@@ -35,6 +35,9 @@ if ($login) {
 			<input type="password" class="form-control" name="password" placeholder="Password">
 			<label for="floatingPassword">Password</label>
 		</div>
+		<div class="form-floating">
+			<input type="hidden" class="form-control" name="fingerprint" id="fingerprint">
+		</div>
 
 		<div class="checkbox mb-3">
 			<label>
