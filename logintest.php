@@ -13,19 +13,18 @@ include 'libs/load.php';
 
 $user = "admin";
 $pass = "1";
-
-
+// $_POST['fingerprint'] = 'jerlin1234';
 
 
 if (isset($_GET['logout'])) {
-    if(Session::get('session_token')){
+    if(Session::get('session_token') and Session::get('fingerprint')){
         $Session = new UserSession(Session::get('session_token'));
-        if($Session->removeSession()){
-            echo "Removing Session Token from Database and Logging out..";
-        } else {
-            echo "Unable to remove token from Database";
+            if($Session->removeSession()){
+                echo "Removing Session Token from Database.";
+            } else {
+                echo "Unable to remove token from Database";
 
-        }
+            }
     }
     Session::destroy();
     die("Session Destroyed, <a href='logintest.php'>Login again</a>");
@@ -36,19 +35,18 @@ $result = null;
 if (Session::get('session_token')) {
     if(UserSession::authorize(Session::get('session_token'))){
         echo "Welcome Back , $user";
+        echo $_SESSION['fingerprint'];
         // echo Session::get('session_token');
     } else {
-        $session_obj = new UserSession(Session::get('session_token'));
-        if($session_obj->removeSession()){
         Session::destroy();
-        }
-        die("Sorry,Session Timed Out, <a href='logintest.php'>Login Again</a>");
+        die("<h1>Session Timed Out,, <a href='logintest2.php'>Login Again</a></h1>");
     }
 
 } else {
 
     if(UserSession::authenticate($user,$pass)){
     echo "New Login Sucess ",$user;
+    echo $_SESSION['fingerprint'];
     } else {
         die("New Login Failed");
     }
