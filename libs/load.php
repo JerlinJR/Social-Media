@@ -4,14 +4,12 @@ include_once 'includes/Database.class.php';
 include_once 'includes/User.class.php';
 include_once 'includes/Session.class.php';
 include_once 'includes/UserSession.class.php';
+include_once 'includes/WebAPI.class.php';
 
 
+$wapi = new WebAPI();
+$wapi->initiateSession();
 
-global $__siteConfig;
-$__siteConfig = file_get_contents($_SERVER['DOCUMENT_ROOT'].'/../databaseConfig.json');
-
-
-Session::start();
 
 function get_config($key, $default=null)
 {

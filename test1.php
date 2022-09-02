@@ -1,19 +1,3 @@
-<pre>
 <?php
-include 'libs/load.php';
 
-
-$conn = Database::getConnection();
-$conn = Database::getConnection();
-$conn = Database::getConnection();
-
-$conn = Database::getConnection();
-
-$conn = Database::getConnection();
-
-$conn = Database::getConnection();
-
-
-
-?>
-</pre>
+file_put_contents('cronlog.txt', time()."\n", FILE_APPEND);

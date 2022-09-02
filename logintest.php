@@ -13,7 +13,7 @@ include 'libs/load.php';
 
 $user = "admin";
 $pass = "1";
-// $_POST['fingerprint'] = 'jerlin1234';
+$_POST['fingerprint'] = 'jerlin1234';
 
 
 if (isset($_GET['logout'])) {
