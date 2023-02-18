@@ -41,6 +41,7 @@ class Session
             return $default;
         }
     }
+
     public static function loadTemplate($name){
         include $_SERVER['DOCUMENT_ROOT'] .get_config("base_path")."/templates/$name.php";
     }
@@ -61,6 +62,7 @@ class Session
     public static function isAuthenticated(){
         return true;
     }
+
 
 
 }
