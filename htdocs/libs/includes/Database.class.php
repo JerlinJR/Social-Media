@@ -4,6 +4,11 @@ class Database
 {
     public static $conn = null;
 
+    /**
+     * This function will return the Database Connection
+     *
+     * @return mysqli
+     */
     public static function getConnection()
     {
         if (Database::$conn == null) {
