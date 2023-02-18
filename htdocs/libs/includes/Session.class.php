@@ -41,6 +41,26 @@ class Session
             return $default;
         }
     }
+    public static function loadTemplate($name){
+        include $_SERVER['DOCUMENT_ROOT'] .get_config("base_path")."/templates/$name.php";
+    }
+
+    public static function renderPage(){
+        Session::loadTemplate('_master');
+    }
+
+    /**
+     * Return PHP  without .php
+     *
+     * @return filename
+     */
+    public static function currentScript(){
+        return basename($_SERVER["PHP_SELF"],'.php');
+    }
+
+    public static function isAuthenticated(){
+        return true;
+    }
 
 
 }
