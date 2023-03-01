@@ -1,6 +1,6 @@
 <pre>
 <?php
-include 'libs/load.php';
+include '../libs/load.php';
 
 
 
