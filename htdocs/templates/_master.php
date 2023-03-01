@@ -1,17 +1,22 @@
 <!doctype html>
 <html lang="en">
 
-<?php load_template("_head");?>
+<?php Session::loadTemplate("_head");?>
 
 <body>
-	<?php load_template("_header");?>
+	<?php Session::loadTemplate("_header");?>
 	<main>
+        <?
+        if(Session::$isError){
+            Session::loadTemplate("_error");
+        } else {
+           Session::loadTemplate(Session::currentScript());
 
-        <?load_template(Session::currentScript());?>
-	
+        } 
+	?>
     </main>
 
-    <?php load_template("_footer");?>
+    <?php Session::loadTemplate("_footer");?>
 
 	<script src="<?=get_config('base_path')?>assets/dist/js/bootstrap.bundle.min.js"></script>
 
