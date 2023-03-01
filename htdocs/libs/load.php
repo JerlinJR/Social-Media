@@ -10,6 +10,10 @@ include_once 'includes/WebAPI.class.php';
 // $wapi = new WebAPI();
 // $wapi->initiateSession();
 
+$wapi = new WebAPI();
+$wapi->initiateSession();
+
+
 
 function get_config($key, $default=null)
 {
@@ -24,8 +28,11 @@ function get_config($key, $default=null)
 
 function load_template($name)
 {
+
     include $_SERVER['DOCUMENT_ROOT'] .get_config("base_path")."/templates/$name.php";
     // include $_SERVER['DOCUMENT_ROOT']."/templates/$name.php";
+
+    include $_SERVER['DOCUMENT_ROOT'] .get_config('base_path')."templates/$name.php";
 
 }
 

@@ -1,0 +1,7 @@
+{
+	"db_server" : "YourServerName",
+	"db_username": "Username",
+	"db_password": "Password",
+	"db_name": "Database Name",
+	"base_path": "/"
+}
