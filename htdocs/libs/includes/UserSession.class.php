@@ -54,9 +54,10 @@ class UserSession
                 if($session->isValid() and $session->isActive()){
                     if($_SERVER['REMOTE_ADDR'] == $session->getIP()){
                         if($_SERVER['HTTP_USER_AGENT'] == $session->getUserAgent()){
-                            if($_SESSION['fingerprint'] == $session->getFingerPrint())
-                                return true;
-                            else {
+                            if($_SESSION['fingerprint'] == $session->getFingerPrint()){
+                                Session::$user = $session->getUser();
+                                return $session;
+                            } else {
                                 throw new Exception("FigerPrint does'nt match");
                             }
                         } else {
@@ -102,6 +103,10 @@ class UserSession
         }
     }
 
+    public function getUser()
+    {
+        return new User($this->uid);
+    }
     public function getIp(){
         if(isset($this->data['ip'])){
             return $this->data['ip'];

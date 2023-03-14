@@ -4,7 +4,8 @@ class Session
 {
 
     public static $isError = false;
-
+    public static $user = null;
+    public static $usersession = null;
     public static function start()
     {
         session_start();
@@ -22,6 +23,12 @@ class Session
         session_destroy();
 
     }
+
+    public static function getUser()
+    {
+        return Session::$user;
+    }
+
 
     public static function set($key,$value)
     {

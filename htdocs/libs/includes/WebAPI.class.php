@@ -30,8 +30,21 @@ class WebAPI{
         Database::getConnection();
     }
 
-    public function initiateSession(){
-        // Session::start();
+    public function initiateSession()
+    {
+
+        Session::start();
+        if(Session::isset('session_token')){
+            try{
+                $session = UserSession::authorize(Session::get('session_token'));
+
+                
+            } catch (Exception $e){
+
+            }
+        } else {
+
+        }
 
     }
 

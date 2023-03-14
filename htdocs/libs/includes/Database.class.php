@@ -19,28 +19,35 @@ class Database
             $pass_word = get_config('db_password');
             $dbname = get_config('db_name');
      
-            // Create connection
-            $connection = new mysqli($servername, $user_name, $pass_word, $dbname);
-            // Check connection
-            if ($connection->connect_error) {
-                die("Connection failed: " . $connection->connect_error);
-            } else {
+       
+        //     $connection = new mysqli($servername, $user_name, $pass_word, $dbname);
+    
+        //     if ($connection->connect_error) {
+        //         die("Connection failed: " . $connection->connect_error);
+        //     } else {
 
-                echo "Initial Database Connection";
+        //         echo "Initial Database Connection";
 
-                // echo "Initial Database Connection";
+        //         Database::$conn = $connection;
+        //         return Database::$conn;
+        //     }
+        // } else {
 
-                Database::$conn = $connection;
-                return Database::$conn;
-            }
-        } else {
+        //     echo "Reusing Database Connection";
+        //         return Database::$conn;
+        // }
 
-            echo "Reusing Database Connection";
+        $conn = mysqli_connect($servername, $username, $password, $dbname);
 
-            // echo "Reusing Database Connection";
+                if (!$conn) {
+                  die("Connection failed: " . mysqli_connect_error());
+                }
+                echo "Connected successfully";
+                        Database::$conn = $conn;
+                        return Database::$conn;
+                }  else {
+                    return Database::$conn;
+                }
+}
 
-
-            return Database::$conn;
-        }
-    }
 }

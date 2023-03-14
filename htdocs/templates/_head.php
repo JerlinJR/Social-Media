@@ -16,6 +16,8 @@
 	<?if (file_exists($_SERVER["DOCUMENT_ROOT"].get_config('base_path').'/css/'.basename($_SERVER['PHP_SELF'],".php").".css")) {?>
 	<link rel="stylesheet" href="<?=get_config('base_path')?>/css/<?=basename($_SERVER['PHP_SELF'],".php")?>.css">
 
+	<? } ?>
+
 	<?if (file_exists($_SERVER["DOCUMENT_ROOT"].get_config('base_path').'css/'.basename($_SERVER['PHP_SELF'],".php").".css")) {?>
 	<link rel="stylesheet" href="<?=get_config('base_path')?>css/<?=basename($_SERVER['PHP_SELF'],".php")?>.css">
 

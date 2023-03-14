@@ -1,5 +1,11 @@
 <?php
 
+
+    /**
+     *  User Class  __construct($username) Check the existence of user in DB
+     *
+     * @param return the User id
+     */
 class User
 {
     private $conn;
@@ -18,6 +24,11 @@ class User
         }
     }
 
+    /**
+     *  User Class  __construct($username) Check the existence of user in DB
+     *
+     * @param return the User id
+     */
     public function __construct($username)
     {
         if (!$this->conn) {
