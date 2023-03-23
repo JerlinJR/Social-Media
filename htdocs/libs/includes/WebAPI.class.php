@@ -14,7 +14,10 @@ class WebAPI{
         //     $__siteConfig = file_get_contents($_SERVER['DOCUMENT_ROOT'].'/../databaseConfig.json');
 
         // }
+        
+        //TODO: $__siteConfig_path is a Doubtable thing 
         $__siteConfig_path = __DIR__."../../../databaseConfig.json";
+        // $__siteConfig_path = $_SERVER['DOCUMENT_ROOT'].'/../project/databaseConfig.json';
         $__siteConfig = file_get_contents($__siteConfig_path);
 
         if(php_sapi_name() == "cli"){
@@ -37,7 +40,7 @@ class WebAPI{
         if(Session::isset('session_token')){
             try{
                 $session = UserSession::authorize(Session::get('session_token'));
-
+                Session::set('user_session',$session);
                 
             } catch (Exception $e){
 

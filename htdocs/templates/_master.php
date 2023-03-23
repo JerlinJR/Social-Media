@@ -6,13 +6,13 @@
 <body>
 	<?php Session::loadTemplate("_header");?>
 	<main>
-        <?
-        if(Session::$isError){
-            Session::loadTemplate("_error");
-        } else {
+        <?php
+        // if(Session::$isError){
+        //     Session::loadTemplate("_error");
+        // } else {
            Session::loadTemplate(Session::currentScript());
 
-        } 
+        // } 
 	?>
     </main>
 

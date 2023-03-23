@@ -34,14 +34,17 @@ class Session
     {
         $_SESSION[$key] = $value;
     }
+
     public static function delete($key)
     {
         unset($_SESSION[$key]);
     }
+
     public static function isset($key)
     {
         return isset($_SESSION[$key]);
     }
+
     public static function get($key,$default=false)
     {
         if(Session::isset($key)){
@@ -51,10 +54,14 @@ class Session
         }
     }
 
+    public static function getUserSession(){
+        return Session::get('user_session');
+    }
+
     public static function loadTemplate($name){
-        $script = $_SERVER['DOCUMENT_ROOT'] .get_config("base_path")."/templates/$name.php";
+        $script = $_SERVER['DOCUMENT_ROOT'] .get_config("base_path")."templates/$name.php";
         if(is_file($script)){
-            include $script;
+            include_once $script;
         } else {
             Session::loadTemplate('_error');
         }
@@ -74,8 +81,13 @@ class Session
     }
 
     public static function isAuthenticated(){
-        return true ;
+        //TODO:Is it a correct Implementation?
+        return Session::getUserSession();
+        // return true;
+    
     }
+
+
 
 
 
