@@ -13,6 +13,7 @@ include_once 'includes/WebAPI.class.php';
 $wapi = new WebAPI();
 $wapi->initiateSession();
 
+global $__siteConfig;
 
 
 function get_config($key, $default=null)
@@ -28,7 +29,6 @@ function get_config($key, $default=null)
 
 function load_template($name)
 {
-
     include $_SERVER['DOCUMENT_ROOT'] .get_config("base_path")."/templates/$name.php";
     // include $_SERVER['DOCUMENT_ROOT']."/templates/$name.php";
 
@@ -36,30 +36,30 @@ function load_template($name)
 
 }
 
-function validate_credentials($username, $password)
-{
-    $conn = Database::getConnection();
+// function validate_credentials($username, $password)
+// {
+//     $conn = Database::getConnection();
 
-    $sql = "SELECT `id`, `username`, `password`,`email` FROM `auth` WHERE username = '$username';";
-    $result = $conn->query($sql);
+//     $sql = "SELECT `id`, `username`, `password`,`email` FROM `auth` WHERE username = '$username';";
+//     $result = $conn->query($sql);
 
-    $error = false;
-    if ($result->num_rows > 0) {
-        $row = mysqli_fetch_assoc($result);
-        if ($row['password'] == $password) {
-            echo 'Login sucess';
-            $error = false;
-        } else {
-            echo 'Login failed';
-            $error = true;
-        }
-    } else {
-        echo "Error: " . $sql . "<br>" . $conn->error;
-        $error = $conn->error;
-    }
-    return $error;
-    print($error);
-}
+//     $error = false;
+//     if ($result->num_rows > 0) {
+//         $row = mysqli_fetch_assoc($result);
+//         if ($row['password'] == $password) {
+//             echo 'Login sucess';
+//             $error = false;
+//         } else {
+//             echo 'Login failed';
+//             $error = true;
+//         }
+//     } else {
+//         echo "Error: " . $sql . "<br>" . $conn->error;
+//         $error = $conn->error;
+//     }
+//     return $error;
+//     print($error);
+// }
 
 function signup($username, $password, $email, $phone)
 {

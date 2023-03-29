@@ -89,7 +89,7 @@ class User
                 // echo "password verifying...";
                 // print_r($row);
                 return $row['username'];
-            // echo "Row returned";
+            // echo "Login Aagala :(";
             } else {
                 return false;
             }

@@ -4,7 +4,7 @@ $login = false;
 if (!empty(isset($_POST['username'])) and !empty(isset($_POST['password']))) {
     $username = $_POST['username'];
     $password = $_POST['password'];
-    $error = validate_credentials($username, $password);
+    $error = UserSession::authenticate($username, $password);
     $login = true;
 }
 

@@ -5,14 +5,15 @@
 
 <body>
 	<?php Session::loadTemplate("_header");?>
+    
 	<main>
         <?php
-        // if(Session::$isError){
-        //     Session::loadTemplate("_error");
-        // } else {
+        if(Session::$isError){
+            Session::loadTemplate("_error");
+        } else {
            Session::loadTemplate(Session::currentScript());
 
-        // } 
+        } 
 	?>
     </main>
 

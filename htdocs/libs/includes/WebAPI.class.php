@@ -4,6 +4,7 @@ class WebAPI{
 
     public function __construct()
     {
+        
 
         // if(php_sapi_name() == "cli"){
         //     global $__siteConfig;
@@ -16,7 +17,9 @@ class WebAPI{
         // }
         
         //TODO: $__siteConfig_path is a Doubtable thing 
-        $__siteConfig_path = __DIR__."../../../databaseConfig.json";
+        $__siteConfig_path = __DIR__."/../../../project/databaseConfig.json";
+        // print($__siteConfig_path);
+        
         // $__siteConfig_path = $_SERVER['DOCUMENT_ROOT'].'/../project/databaseConfig.json';
         $__siteConfig = file_get_contents($__siteConfig_path);
 
@@ -41,12 +44,12 @@ class WebAPI{
             try{
                 $session = UserSession::authorize(Session::get('session_token'));
                 Session::set('user_session',$session);
-                
             } catch (Exception $e){
-
+                echo "Unable to create session";
             }
         } else {
-
+            // echo "No session found try login";
+            return false;
         }
 
     }

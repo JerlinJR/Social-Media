@@ -7,6 +7,8 @@ print(basename($_SERVER["PHP_SELF"],'.php'));
 ?>
 </pre>
 
+<?
+
 include 'libs/load.php';
 
 

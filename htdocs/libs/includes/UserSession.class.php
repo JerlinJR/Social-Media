@@ -32,9 +32,11 @@ class UserSession
             $ip = $_SERVER['REMOTE_ADDR'];
             $user_agent = $_SERVER['HTTP_USER_AGENT'];
             $fingerprint = $_POST['fingerprint'];
+            // echo $_POST['fingerprint'];
             $token = md5(rand(0, 999999) .$ip.$user_agent.time());
             $sql = "INSERT INTO `session` (`uid`, `token`, `login_time`, `ip`, `user_agent`, `finger_print`, `active`)
             VALUES ('$user->id', '$token', now(), '$ip', '$user_agent', '$fingerprint', '1')";
+            // echo $sql;
             if ($conn->query($sql)) {
                 Session::set('session_token', $token);
                 Session::set('fingerprint',$fingerprint);
@@ -56,6 +58,7 @@ class UserSession
                         if($_SERVER['HTTP_USER_AGENT'] == $session->getUserAgent()){
                             if($_SESSION['fingerprint'] == $session->getFingerPrint()){
                                 Session::$user = $session->getUser();
+                                // print(Session::$user);
                                 return $session;
                             } else {
                                 throw new Exception("FigerPrint does'nt match");

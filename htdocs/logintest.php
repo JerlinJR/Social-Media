@@ -12,8 +12,14 @@ include 'libs/load.php';
 
 
 $user = "admin";
-$pass = "1";
+$pass = "admin";
 $_POST['fingerprint'] = 'jerlin1234';
+
+print(Session::get("session_token"));
+print(Session::get("fingerprint"));
+// print(Session::get('PHPSESSID'));
+print($_SESSION['PHPSESSID']);
+
 
 
 if (isset($_GET['logout'])) {
@@ -23,7 +29,6 @@ if (isset($_GET['logout'])) {
                 echo "Removing Session Token from Database.";
             } else {
                 echo "Unable to remove token from Database";
-
             }
     }
     Session::destroy();
@@ -35,7 +40,7 @@ $result = null;
 if (Session::get('session_token')) {
     if(UserSession::authorize(Session::get('session_token'))){
         echo "Welcome Back , $user";
-        echo $_SESSION['fingerprint'];
+        // echo $_SESSION['fingerprint'];
         // echo Session::get('session_token');
     } else {
         Session::destroy();

@@ -11,4 +11,4 @@ $value = "setLastName";
 // // echo strtolower($result);
 // echo strtolower(substr("$value", 3, strlen($value)-3));
 
-$user_session->isValid();
+// echo $user_session->isValid();

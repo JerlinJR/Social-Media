@@ -82,12 +82,21 @@ class Session
 
     public static function isAuthenticated(){
         //TODO:Is it a correct Implementation?
-        return Session::getUserSession();
+        // return Session::getUserSession()->isValid();
         // return true;
-    
+        if (is_object(Session::getUserSession())) {
+            return Session::getUserSession()->isValid();
+        }
+        return false;    
     }
 
-
+    public static function ensureLogin(){
+        if(!Session::isAuthenticated()){
+            Session::set('_redirect', $_SERVER['REQUEST_URI']);
+            header("Location:/login.php");
+            die();
+        }
+    }
 
 
 
