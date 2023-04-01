@@ -1,5 +1,7 @@
 <?php
 
+include_once __DIR__.'/../traits/SQLGetterSetter.trait.php';
+
 
     /**
      *  User Class  __construct($username) Check the existence of user in DB
@@ -8,34 +10,19 @@
      */
 class User
 {
+    use SQLGetterSetter;
+
     private $conn;
 
-    public function __call($name, $arguments)
-    {
-        $property = preg_replace("/[^0-9a-zA-Z]/", "", substr($name, 3));
-        $property = strtolower(preg_replace('/\B([A-Z])/', '_$1', $property));
-
-        if (substr($name, 0, 3) == 'get') {
-            return $this->_get_data($property);
-        } elseif (substr($name, 0, 3) == 'set') {
-            return $this->_set_data($property, $arguments[0]);
-        } else {
-            throw new Exception("User::__call() -> $name, function unavaliable");
-        }
-    }
-
-    /**
-     *  User Class  __construct($username) Check the existence of user in DB
-     *
-     * @param return the User id
-     */
     public function __construct($username)
     {
         if (!$this->conn) {
             $this->conn = Database::getConnection();
         }
-
         $this->username = $username;
+        $this->id = null;
+        $this->table = 'auth';
+        // echo "Username : ".$this->username."\n";
         $sql = "SELECT `id` FROM `auth` WHERE `username`= '$username' OR `id` = '$username' LIMIT 1";
         // echo $sql;
         $result = $this->conn->query($sql);
@@ -64,17 +51,25 @@ class User
         $sql = "INSERT INTO `auth` (`username`, `password`, `email`, `phone`, `blocked`, `active`)
     VALUES ('$username', '$pass', '$email', '$phone', '0', '1');";
 
-        $error = false;
-        if ($conn->query($sql) === true) {
-            $error = false;
-        } else {
-            echo "Error: " . $sql . "<br>" . $conn->error;
-            $error = $conn->error;
-        }
 
-        $conn->close();
-        return $error;
+        //PHP 7.4 - all MySQLi errors are throws as Exceptions
+        // $error = false;
+        // if ($conn->query($sql) === true) {
+        //     $error = false;
+        // } else {
+        //     echo "Error: " . $sql . "<br>" . $conn->error;
+        //     $error = $conn->error;
+        // }
+
+        //PHP 8.1 - all MySQLi errors are throws as Exceptions
+        try {
+            return $conn->query($sql);
+        } catch (Exception $e) {
+            echo "Error: " . $sql . "<br>" . $conn->error;
+            return false;
+        }
     }
+
     public static function login($username, $password)
     {
         $conn = Database::getConnection();
@@ -103,44 +98,6 @@ class User
 
     // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-
-    private function _set_data($name, $data)
-    {
-        if (!$this->conn) {
-            $this->conn = Database::getConnection();
-        }
-        print($this->id."\n");
-
-        $sql = "UPDATE `users` SET `$name` ='$data' WHERE `id` = $this->id";
-
-        print($sql."\n");
-        print($this->id."\n");
-
-        if ($this->conn->query($sql)) {
-            echo "Data Insertedd";
-
-            return true;
-        } else {
-            echo "Error: " . $sql . "<br>" . $this->conn->error;
-            return false;
-        }
-    }
-
-    private function _get_data($name)
-    {
-        if (!$this->conn) {
-            $this->conn = Database::getConnection();
-        }
-        $sql = "SELECT `$name` FROM `users` WHERE `id` = '$this->id'";
-        $result = $this->conn->query($sql);
-        if ($result->num_rows) {
-            $row = $result->fetch_assoc()["$name"];
-            return $row;
-        } else {
-            echo "Error: " . $sql . "<br>" . $this->conn->error;
-            return null;
-        }
-    }
     public function setdob($date)
     {
         if (checkdate($year, $month, $day)) {

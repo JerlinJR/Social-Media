@@ -58,7 +58,7 @@ class UserSession
                         if($_SERVER['HTTP_USER_AGENT'] == $session->getUserAgent()){
                             if($_SESSION['fingerprint'] == $session->getFingerPrint()){
                                 Session::$user = $session->getUser();
-                                // print(Session::$user);
+                                // echo Session::$user;
                                 return $session;
                             } else {
                                 throw new Exception("FigerPrint does'nt match");

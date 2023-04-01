@@ -62,6 +62,7 @@ class Session
         $script = $_SERVER['DOCUMENT_ROOT'] .get_config("base_path")."templates/$name.php";
         if(is_file($script)){
             include_once $script;
+            // echo $script;
         } else {
             Session::loadTemplate('_error');
         }
