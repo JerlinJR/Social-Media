@@ -42,10 +42,10 @@ class WebAPI{
         Session::start();
         if(Session::isset('session_token')){
             try{
-                $session = UserSession::authorize(Session::get('session_token'));
-                Session::set('user_session',$session);
+                Session::$usersession = UserSession::authorize(Session::get('session_token'));
+                
             } catch (Exception $e){
-                echo "Unable to create session";
+                //TODO:Handle Exception
             }
         } else {
             // echo "No session found try login";

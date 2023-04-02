@@ -2,14 +2,86 @@
 <?php
 
 
-print_r($_SERVER);
-print(basename($_SERVER["PHP_SELF"],'.php'));
+// print_r($_SERVER);
+// print(basename($_SERVER["PHP_SELF"],'.php'));
 ?>
 </pre>
 
 <?
 
 include 'libs/load.php';
+
+$image = $_FILES['post_image']['tmp_name'];
+$text = $_POST['post_text'];
+
+// if(isset($_FILES['post_image']) and isset($_POST['post_text'])){
+    // print_r($_FILES);
+    // echo $image;
+    Post::registerPost($text,$image);
+
+// } else {
+//     print("something Wrong");
+// }
+
+// print(Session::getUser()->getEmail());
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -20,8 +92,8 @@ include 'libs/load.php';
 // $conn = Database::getConnection();
 
 
-$user = "admin";
-$pass = "1";
+// $user = "admin";
+// $pass = "1";
 // $username ="Jerlin";
 
 

@@ -1,1 +1,12 @@
 ErrorDocument 404 /error.php
+ErrorDocument 500 "<h1>Some Internal Error, Please contact Jerlin(Developer)</h1>"
+
+RewriteEngine On
+RewriteBase /
+
+
+RewriteRule ^/?images/([^/]+)?$ images.php?name=$1 [L,QSA,NC]
+
+RewriteCond %{REQUEST_FILENAME}\.php -f
+RewriteRule ^([^/.]+)$ $1.php [L]
+

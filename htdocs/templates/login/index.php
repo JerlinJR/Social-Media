@@ -14,7 +14,7 @@ if (isset($_POST['username']) and isset($_POST['password'])) {
 if (!$login_page) {
     if ($result) {
         $should_redirect = Session::get('_redirect');
-		echo Session::get('_redirect');
+		// echo Session::get('_redirect');
         $redirect_to = get_config('base_path');
         if (isset($should_redirect)) {
             $redirect_to = $should_redirect;

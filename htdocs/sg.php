@@ -8,7 +8,7 @@ echo "_FILES\n";
 
 
 $a = new Post(1);
-// print($a->getOwner());
+print($a->getOwner());
 print($a->getPostText());
 
 ?>

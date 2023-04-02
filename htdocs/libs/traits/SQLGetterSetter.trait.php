@@ -12,7 +12,7 @@ trait SQLGetterSetter{
         } elseif (substr($name, 0, 3) == 'set') {
             return $this->_set_data($property, $arguments[0]);
         } else {
-            throw new Exception($this->table."::__call() -> $name, function unavaliable");
+            throw new Exception(__CLASS__."::__call() -> $name, function unavaliable");
         }
     }
 
@@ -21,16 +21,19 @@ trait SQLGetterSetter{
         if (!$this->conn) {
             $this->conn = Database::getConnection();
         }
-        $sql = "SELECT `$name` FROM `$this->table` WHERE `id` = '$this->id'";
-        // echo $sql;
-        $result = $this->conn->query($sql);
-        if ($result->num_rows) {
-            $row = $result->fetch_assoc()["$name"];
-            return $row;
-        } else {
-            echo "Error: " . $sql . "<br>" . $this->conn->error;
-            return null;
+        try{
+            $sql = "SELECT `$name` FROM `$this->table` WHERE `id` = '$this->id'";
+            $result = $this->conn->query($sql);
+            if ($result->num_rows) {
+                $row = $result->fetch_assoc()["$name"];
+                return $row;
+            } else {
+                return null;
+            }
+        } catch (Exception $e){
+            throw new Exception(__CLASS__."::get_data() -> $name, function unavaliable");
         }
+
     }
 
         
@@ -39,20 +42,19 @@ trait SQLGetterSetter{
         if (!$this->conn) {
             $this->conn = Database::getConnection();
         }
-        print($this->id."\n");
+        try{
+            $sql = "UPDATE `$this->table` SET `$name` ='$data' WHERE `id` = $this->id";
 
-        $sql = "UPDATE `$this->table` SET `$name` ='$data' WHERE `id` = $this->id";
-
-        print($sql."\n");
-        print($this->id."\n");
-
-        if ($this->conn->query($sql)) {
-            echo "Data Insertedd";
-
-            return true;
-        } else {
-            echo "Error: " . $sql . "<br>" . $this->conn->error;
-            return false;
+            print($sql."\n");
+            print($this->id."\n");
+    
+            if ($this->conn->query($sql)) {
+                return true;
+            } else {
+                return false;
+            }
+        } catch(Exception $e){
+            throw new Exception(__CLASS__."::setdata() -> $name, function unavaliable");
         }
     }
 }

@@ -55,7 +55,7 @@ class Session
     }
 
     public static function getUserSession(){
-        return Session::get('user_session');
+        return Session::$usersession;
     }
 
     public static function loadTemplate($name){

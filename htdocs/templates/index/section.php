@@ -1,7 +1,7 @@
 
 <?php
 
-// if(isset($_POST['post_text']) and isset($_POST['post_image'])){
+// if(isset($_POST['post_text']) and isset($_FILES['post_image'])){
 	
 
 // } else {
@@ -22,7 +22,7 @@
 					<textarea class="form-control" name="post_text" id="post_text" rows="3" placeholder="Whats on your mind ?" >
 						</textarea>
 						<div class="input-group mb-3">
-							<input type="file" name="post_image" class="form-control" id="inputGroupFile02">
+							<input type="file" accept="image/*" name="post_image" class="form-control" id="inputGroupFile02">
 							<!-- <label class="input-group-text" for="inputGroupFile02">Upload</label> -->
 						</div>
 					<p>
