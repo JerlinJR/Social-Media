@@ -1,0 +1,176 @@
+{
+	"info": {
+		"_postman_id": "88c40727-cd45-4645-b34a-53df3a2cf3fd",
+		"name": "Web App",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "16275396"
+	},
+	"item": [
+		{
+			"name": "Login",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "username",
+							"value": "admin",
+							"type": "text"
+						},
+						{
+							"key": "password",
+							"value": "admin",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "https://app.jerlin.space/login.php",
+					"protocol": "https",
+					"host": [
+						"app",
+						"jerlin",
+						"space"
+					],
+					"path": [
+						"login.php"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Settings",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "https://app.jerlin.space/settings.php",
+					"protocol": "https",
+					"host": [
+						"app",
+						"jerlin",
+						"space"
+					],
+					"path": [
+						"settings.php"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Test",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "https://app.jerlin.space/test.php",
+					"protocol": "https",
+					"host": [
+						"app",
+						"jerlin",
+						"space"
+					],
+					"path": [
+						"test.php"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Index",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "https://app.jerlin.space/index.php",
+					"protocol": "https",
+					"host": [
+						"app",
+						"jerlin",
+						"space"
+					],
+					"path": [
+						"index.php"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "LoginTest",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://app.jerlin.space/logintest.php",
+					"protocol": "https",
+					"host": [
+						"app",
+						"jerlin",
+						"space"
+					],
+					"path": [
+						"logintest.php"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Images",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": ""
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Error",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://app.jerlin.space/error.php",
+					"protocol": "https",
+					"host": [
+						"app",
+						"jerlin",
+						"space"
+					],
+					"path": [
+						"error.php"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Signup",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "https://app.jerlin.space/signup.php",
+					"protocol": "https",
+					"host": [
+						"app",
+						"jerlin",
+						"space"
+					],
+					"path": [
+						"signup.php"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
