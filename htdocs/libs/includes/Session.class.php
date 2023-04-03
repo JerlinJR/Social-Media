@@ -29,6 +29,19 @@ class Session
         return Session::$user;
     }
 
+    public static function isOwnerOf($owner){
+        $session_user = Session::getUser();
+        if($session_user){
+            if($session_user->getEmail() == $owner){
+                return true;
+            } else {
+                return false;
+            }
+        } else {
+            return false;
+        }
+    }
+
 
     public static function set($key,$value)
     {

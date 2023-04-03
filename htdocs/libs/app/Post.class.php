@@ -16,7 +16,7 @@ class Post{
             $image_path = get_config("upload_path") . $image_name;
         if(move_uploaded_file($image_tmp,$image_path)){
             $sql = "INSERT INTO `posts` (`post_text`, `multiple_images`,`image_uri`, `like_count`, `uploaded_time`, `owner`)
-            VALUES ('$text', '0' , '/images/$image_name', '0', now(), '$author');";
+            VALUES ('$text', '0' , '/files/$image_name', '0', now(), '$author');";
             $conn = Database::getConnection();
             if($conn->query($sql)){
                 $id = mysqli_insert_id($conn);
@@ -31,9 +31,20 @@ class Post{
         } else {
             throw new Exception("Image is empty");
         }
-        
-
     }
+
+    public static function getAllPost(){
+        $conn = Database::getConnection();
+        $sql = "SELECT * FROM `posts` ORDER BY `uploaded_time` DESC";
+        $result = $conn->query($sql);
+        if($result){
+            return iterator_to_array($result);
+        } else {
+            echo "Something Went Wrong";
+        }
+        
+    }
+
     public function __construct($id){
         $this->id = $id;
         $this->table = 'posts';

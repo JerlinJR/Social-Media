@@ -14,20 +14,19 @@ include 'libs/load.php';
 $image = $_FILES['post_image']['tmp_name'];
 $text = $_POST['post_text'];
 
-// if(isset($_FILES['post_image']) and isset($_POST['post_text'])){
-    // print_r($_FILES);
-    // echo $image;
+if(isset($_FILES['post_image']) and isset($_POST['post_text'])){
+
     Post::registerPost($text,$image);
 
-// } else {
-//     print("something Wrong");
-// }
+} else {
+    print("something Wrong");
+}
 
 // print(Session::getUser()->getEmail());
 
 
 
-
+// Post::getAllPost();
 
 
 

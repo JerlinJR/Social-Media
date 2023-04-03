@@ -1,6 +1,7 @@
 <?php
 
-//TODO: Implement autoload class file
+//TODO: Implement autoload with spl_autoload_register();
+require 'vendor/autoload.php';
 include_once 'includes/Database.class.php';
 include_once 'includes/User.class.php';
 include_once 'includes/Session.class.php';

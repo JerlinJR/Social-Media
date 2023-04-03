@@ -1,19 +1,17 @@
 
 <?php
 
-// if(isset($_POST['post_text']) and isset($_FILES['post_image'])){
-	
-
-// } else {
-
-// }
-
+if(isset($_POST['post_text']) and isset($_FILES['post_image'])){
+	$image_tmp = $_FILES['post_image']['tmp_name'];
+	$text = $_POST['post_text'];
+	Post::registerPost($text,$image_tmp);
+}
 ?>
 
 
 <section class="py-5 text-center container">
 			<div class="row py-lg-5">
-				<form action="sg.php" method="post" enctype="multipart/form-data">
+				<form action="/" method="post" enctype="multipart/form-data">
 				<div class="col-lg-6 col-md-8 mx-auto">
 					<h1 class="fw-light">What's Goin On?
 						<?=Session::getUser()->getUsername()?>
