@@ -5,11 +5,11 @@
 			<?php
                 $posts = Post::getAllPost();
 				use Carbon\Carbon;
-foreach ($posts as $post) {
-    $p = new Post($post['id']);
-    $uploaded_time = Carbon::parse($p->getUploadedTime());
-    $uploaded_time_str = $uploaded_time->diffForHumans();
-    ?>
+				foreach ($posts as $post) {
+					$p = new Post($post['id']);
+					$uploaded_time = Carbon::parse($p->getUploadedTime());
+					$uploaded_time_str = $uploaded_time->diffForHumans();
+            ?>
 			<div class="col-lg-3 mb-4">
 				<div class="card">
 					<img class="bd-placeholder-img card-img-top" src="<?=$p->getImageUri()?>">
