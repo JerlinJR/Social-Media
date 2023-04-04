@@ -9,8 +9,11 @@
 
 <?
 
+echo phpinfo();
+
 include 'libs/load.php';
 
+print_r($_FILES);
 $image = $_FILES['post_image']['tmp_name'];
 $text = $_POST['post_text'];
 
@@ -21,6 +24,12 @@ if(isset($_FILES['post_image']) and isset($_POST['post_text'])){
 } else {
     print("something Wrong");
 }
+
+
+// $p = new Post(1);
+// print($p->getPostedBy());
+
+
 
 // print(Session::getUser()->getEmail());
 

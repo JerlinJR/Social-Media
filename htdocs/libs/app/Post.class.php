@@ -39,6 +39,7 @@ class Post{
         $result = $conn->query($sql);
         if($result){
             return iterator_to_array($result);
+
         } else {
             echo "Something Went Wrong";
         }

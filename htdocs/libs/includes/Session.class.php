@@ -2,7 +2,6 @@
 
 class Session
 {
-
     public static $isError = false;
     public static $user = null;
     public static $usersession = null;
@@ -111,6 +110,8 @@ class Session
             die();
         }
     }
+
+
 
 
 
