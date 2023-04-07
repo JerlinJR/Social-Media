@@ -1,5 +1,6 @@
 <div class="album py-5 bg-light">
 	<div class="container">
+	<h3 id="total-posts">Total Posts: N/A</h3>
 	<!-- data-masonry='{"percentPosition": true }' -->
 		<div class="row" id="masonry-area" >
 			<?php
@@ -7,6 +8,7 @@
 				use Carbon\Carbon;
 				foreach ($posts as $post) {
 					$p = new Post($post['id']);
+					// $owner = new User($post['owner']);
 					$uploaded_time = Carbon::parse($p->getUploadedTime());
 					$uploaded_time_str = $uploaded_time->diffForHumans();
             ?>
@@ -26,7 +28,9 @@
 								<button type="button" class="btn btn-sm btn-outline-danger">Delete</button>
 								<?}?>
 							</div>
+							<!-- <small class="text-muted"> PostedBy:</small> -->
 							<small class="text-muted"><?=$uploaded_time_str?></small>
+							<!-- <button type="button" class="btn btn-sm btn-outline-secondary">PostedBy: </button> -->
 						</div>
 					</div>
 				</div>

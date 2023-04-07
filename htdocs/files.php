@@ -19,7 +19,7 @@ if(is_file($image_path)){
     header("Content-Length:".filesize($image_path));
     header('Cache-control: max-age='.(60*60*24*365));
     header('Expires: '.gmdate(DATE_RFC1123, time()+60*60*24*365));
-    header('Last-Modified: '.gmdate(DATE_RFC1123, filemtime($path_to_image)));
+    header('Last-Modified: '.gmdate(DATE_RFC1123, filemtime($image_path)));
     header_remove('Pragma');
     // header('Pragma: cache');
 

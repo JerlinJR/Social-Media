@@ -43,6 +43,21 @@ class Post{
         } else {
             echo "Something Went Wrong";
         }
+    }
+
+    public static function getTotalPosts(){
+        $conn = Database::getConnection();
+        $sql = "SELECT COUNT(*) as counts FROM `posts` ORDER BY `uploaded_time` DESC";
+        $result = $conn->query($sql);
+        if($result){
+            return iterator_to_array($result);
+
+        } else {
+            echo "Something Went Wrong";
+        }
+    }
+
+    public function deletePost(){
         
     }
 

@@ -13,17 +13,17 @@ echo phpinfo();
 
 include 'libs/load.php';
 
-print_r($_FILES);
-$image = $_FILES['post_image']['tmp_name'];
-$text = $_POST['post_text'];
+// print_r($_FILES);
+// $image = $_FILES['post_image']['tmp_name'];
+// $text = $_POST['post_text'];
 
-if(isset($_FILES['post_image']) and isset($_POST['post_text'])){
+// if(isset($_FILES['post_image']) and isset($_POST['post_text'])){
 
-    Post::registerPost($text,$image);
+//     Post::registerPost($text,$image);
 
-} else {
-    print("something Wrong");
-}
+// } else {
+//     print("something Wrong");
+// }
 
 
 // $p = new Post(1);

@@ -23,7 +23,7 @@ class User
         $this->id = null;
         $this->table = 'auth';
         // echo "Username : ".$this->username."\n";
-        $sql = "SELECT `id` FROM `auth` WHERE `username`= '$username' OR `id` = '$username' LIMIT 1";
+        $sql = "SELECT `id` FROM `auth` WHERE `username`= '$username' OR `id` = '$username' OR `email` = '$username' LIMIT 1";
         // echo $sql;
         $result = $this->conn->query($sql);
 

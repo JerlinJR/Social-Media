@@ -8,3 +8,10 @@ percentPosition: true
 $grid.imagesLoaded().progress( function() {
 $grid.masonry('layout');
 });
+
+$.post('/api/posts/count', {
+    id: 10
+}, function(data) {
+    console.log(data);
+    $('#total-posts').html("Total Posts: " + data.counts);
+});
