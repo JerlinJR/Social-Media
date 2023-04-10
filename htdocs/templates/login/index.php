@@ -37,7 +37,7 @@ if (!$login_page) {
 } else {
     ?>
 
-<main class="form-signin">
+<main class="form-signin w-100 m-auto">
 	<form method="post" action="login.php">
 		<img class="mb-4" src="" alt=""
 			height="50">

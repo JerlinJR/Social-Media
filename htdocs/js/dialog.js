@@ -41,7 +41,7 @@ class Dialog {
 		}
 
 		this.options = {
-            'framework': "coreui",
+            'framework': "bootstrap",
             'clone_id': 'dummy-dialog-modal',
         };
 
@@ -57,7 +57,7 @@ class Dialog {
 			this.options.size = options;
 		}
 
-        console.log(this.options);
+        // console.log(this.options);
 
 		this.title = title,
 		this.message = message
@@ -181,7 +181,7 @@ class Dialog {
 				target: this,
                 modal: this.clone
 			}, function (event) {
-				console.log("Hidden bs modal event");
+				// console.log("Hidden bs modal event");
                 $('#'+event.data.target.cloneId).remove();
             });
 
@@ -230,4 +230,3 @@ function display_dialog(bt_name,content,func){
 	d.show();
 }
 
-  
