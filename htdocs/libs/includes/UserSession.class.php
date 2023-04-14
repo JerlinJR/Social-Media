@@ -88,7 +88,10 @@ class UserSession
     {
 
         if(isset($this->data['login_time'])){
+            // print_r($this->data['login_time']);
             $login_time = DateTime::createFromFormat('Y-m-d H:i:s', $this->data['login_time']);
+            // $a = time() - $login_time->getTimestamp();
+            // echo "You will be Logged out in : ".'3600' - $a." Seconds";
             if (3600 > time() - $login_time->getTimestamp()) {
                 return true;
             } else {

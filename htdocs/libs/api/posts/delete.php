@@ -1,9 +1,17 @@
 <?php
 
-${basename(__FILE__, '.php')} = function(){
-    $result = [
-        'sucess' => false,
-        'message'=> 'Invalid Request'
-    ];
-    $this->response($this->json($result), 200);
+${basename(__FILE__, '.php')} = function () {
+    if ($this->isAuthenticated() and $this->paramsExists('id')) {
+        $p = new Post($this->_request['id']);
+        $this->response($this->json([
+            'message' => $p->delete()
+        ]), 200);
+    } else {
+        $this->response($this->json([
+            'message' => "bad request"
+        ]), 400);
+    }
 };
+
+
+

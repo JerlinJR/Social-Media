@@ -25,9 +25,19 @@ $('.btn-delete').on('click', function(){
             'class': "btn-danger",
             'onClick': function(event){
                 console.log(`Assume that the Post ${post_id} is deleted`);
-                $(`#post-${post_id}`).remove();
-                $(event.data.modal).modal('hide');
-                
+                // $(`#post-${post_id}`).remove();
+
+                $.post('/api/posts/delete',
+                {
+                    id: post_id
+                }, function(data,textSuccess){
+                    console.log(textSuccess);
+                    console.log(data);
+                    if(textSuccess == "success"){
+                        $(`#post-${post_id}`).remove();
+                    }
+                });
+                $(event.data.modal).modal('hide');   
             }
         },
         {

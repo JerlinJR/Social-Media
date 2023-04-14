@@ -1,4 +1,4 @@
-/*CSS test banner on Mon Apr 10 2023 16:46:29 GMT+0000 (Coordinated Universal Time)*/
+/*CSS test banner on Fri Apr 14 2023 12:56:27 GMT+0000 (Coordinated Universal Time)*/
 // init Masonry
 var $grid = $('#masonry-area').masonry({
 // itemSelector: '.col',
@@ -26,9 +26,19 @@ $('.btn-delete').on('click', function(){
             'class': "btn-danger",
             'onClick': function(event){
                 console.log(`Assume that the Post ${post_id} is deleted`);
-                $(`#post-${post_id}`).remove();
-                $(event.data.modal).modal('hide');
-                
+                // $(`#post-${post_id}`).remove();
+
+                $.post('/api/posts/delete',
+                {
+                    id: post_id
+                }, function(data,textSuccess){
+                    console.log(textSuccess);
+                    console.log(data);
+                    if(textSuccess == "success"){
+                        $(`#post-${post_id}`).remove();
+                    }
+                });
+                $(event.data.modal).modal('hide');   
             }
         },
         {
