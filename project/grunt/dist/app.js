@@ -1,4 +1,4 @@
-/*CSS test banner on Fri Apr 14 2023 12:56:27 GMT+0000 (Coordinated Universal Time)*/
+/*CSS test banner on Sat Apr 15 2023 16:49:00 GMT+0000 (Coordinated Universal Time)*/
 // init Masonry
 var $grid = $('#masonry-area').masonry({
 // itemSelector: '.col',
@@ -52,4 +52,12 @@ $('.btn-delete').on('click', function(){
     ])
     d.show();
 });
+$(document).ready(function(){
+    dialog("Notify","Page loading finished");
+
+    $.get('api/demo/modal', function(data, textSuccess){
+        console.log("woriking");
+    });
+
+})
 //# sourceMappingURL=app.js.map
