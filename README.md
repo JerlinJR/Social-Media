@@ -3,7 +3,7 @@ To get started, clone this repository to a proper document root. For XAMPP, this
 This code is right now deployed at: https://app.jerlin.space
 
 
-## Currently things are in development will be updated when things gets an complete architecture But still you can find bugs [ClickHere](app.jerlin.space)
+## Currently things are in development will be updated when things gets an complete architecture. But still you can find bugs [ClickHere](app.jerlin.space)
 
 
 ## Setup
