@@ -6,7 +6,7 @@
 <body>
 	<?php Session::loadTemplate("_header");?>
     
-	<main>
+	<main id="mainel">
         <?php
         if(Session::$isError){
             Session::loadTemplate("_error");
