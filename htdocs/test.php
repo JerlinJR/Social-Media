@@ -1,136 +1,52 @@
-<pre>
+
 <?php
-
-
-// print_r($_SERVER);
-// print(basename($_SERVER["PHP_SELF"],'.php'));
-?>
-</pre>
-
-<?
-
-// echo phpinfo();
-
-include 'libs/load.php';
-
-
-$p = new Post(19);
-
-$del = $p->delete();
-if($del){
-    echo "Deleted";
-} else {
-    echo "Not Deleted";
+function TakeAllBags($A, $D, $E)
+{
+    for ($i = 0; $i < 3; $i++) {
+        for ($j = $i+1; $j < 3; $j++) {
+            if ($A[$i] + $A[$j] <= $D) {
+                if (array_sum($A) - $A[$i] - $A[$j] <= $E) {
+                    return "Yes";
+                }
+            }
+        }
+    }
+    return "No";
 }
 
+$A = array(8, 5, 7);
+$D = 15;
+$E = 6;
+
+$result = TakeAllBags($A, $D, $E);
+echo $result;
 
 
+// Variables : 
+// Read seven integers from user and store in array a
+//  Loop through the array to seprate 1 and 0
+//      If a is 1, increment sunnyDays by 1
+//      If a is 0, increment rainyDays by 1
+//  If sunnyDays is greater equal to rainyDays, output "Good"
+//     Otherwise, output "Bad"
 
+// <?php
 
+// $a = array(1, 0, 1, 1, 0, 0, 1); 
 
+// $sunnyDays = 0;
+// $rainyDays = 0;
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-// print_r($_POST);
-
-// $conn = Database::getConnection();
-// $conn = Database::getConnection();
-// $conn = Database::getConnection();
-
-
-// $user = "admin";
-// $pass = "1";
-// $username ="Jerlin";
-
-
-// $result = UserSession
-
-
-
-//create function with an exception
-// function checkNum($number) {
-//   if($number>1) {
-//     throw new Exception("Value must be 1 or below");
-//   }
-//   return true;
+// foreach ($a as $day) {
+//     if ($day == 1) {
+//         $sunnyDays++;
+//     } else {
+//         $rainyDays++;
+//     }
 // }
 
-// //trigger exception in a "try" block
-// try {
-//   checkNum(2);
-//   //If the exception is thrown, this text will not be shown
-//   echo 'If you see this, the number is 1 or below';
-// }
-
-// //catch exception
-// catch(Exception $a) {
-//   echo 'Message: ' .$a->getMessage();
-// }
-
-// $result = User::__construct($user);
-
-// $object1 = new User($user);
-
-// $object1->Thisoisafunction();
-// $object2 = new User($username);
-
-// print($object1->getBio());
-// print($object1->getFirstname());
-// $a = $object1->setBio("Reset BIo");
-
-// if ($a) {
-//     echo "sucess";
+// if ($sunnyDays > $rainyDays) {
+//     echo "Nalla Climate Pa :)";
 // } else {
-//     echo "Failed";
+//     echo "Ennaa Climate ya ithu :( ";
 // }
-
-
-
-
-
-
-
-
-?>
-
-</pre>
-

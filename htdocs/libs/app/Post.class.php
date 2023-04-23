@@ -57,10 +57,6 @@ class Post{
         }
     }
 
-    public function deletePost(){
-        
-    }
-
     public function __construct($id){
         $this->id = $id;
         $this->table = 'posts';

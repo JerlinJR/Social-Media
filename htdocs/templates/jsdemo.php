@@ -1,9 +1,12 @@
-
-<h1>Working</h1>
+<br>
 
 <!-- Button trigger modal -->
 <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
   Launch demo modal
+</button>
+
+<button type="button" class="btn btn-info" id="fetchModal">
+  Fetch new modal
 </button>
 
 <!-- Modal -->
@@ -17,7 +20,7 @@
         </button>
       </div>
       <div class="modal-body">
-        ...
+        This is loaded from API
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>

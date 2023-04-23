@@ -1,4 +1,4 @@
-/*CSS test banner on Fri Apr 14 2023 12:56:27 GMT+0000 (Coordinated Universal Time)*/
+/*CSS test banner on Sun Apr 23 2023 04:36:40 GMT+0000 (Coordinated Universal Time)*/
 // init Masonry
 var $grid = $('#masonry-area').masonry({
 // itemSelector: '.col',
@@ -53,10 +53,30 @@ $('.btn-delete').on('click', function(){
     d.show();
 });
 $(document).ready(function(){
-    dialog("Notify","Page loading finished");
+    // dialog("Notify","Page loading finished");
+    console.log("Page Loaded Sucessfully")
 
-    $.get('api/demo/modal', function(data, textSuccess){
-        $('main#mainel').append(data)
+    $('#exampleModal').on('show.bs.modal', function(){
+        console.log("Modal is being shown")
+    });
+
+    $('#exampleModal').on('shown.bs.modal', function(){
+        console.log("Modal is been shown")
+    });
+
+    $('#exampleModal').on('hide.bs.modal', function(){
+        console.log("Modal is being hide")
+    });
+
+    $('#exampleModal').on('hidden.bs.modal', function(){
+        console.log("Modal is been hide")
+    });
+
+
+    $('#fetchModal').on('click',function(){
+        $.get('api/demo/modal', function(data, textSuccess){
+            $('main#mainel').append(data)
+        });
     });
 
 })
