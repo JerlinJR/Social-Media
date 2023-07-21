@@ -4,36 +4,22 @@ class WebAPI{
 
     public function __construct()
     {
-        
-
-        // if(php_sapi_name() == "cli"){
-        //     global $__siteConfig;
-        //     $__siteConfig = file_get_contents("/home/Jerlin/htdocs/app/htdocs/project/databaseConfig.json");
-        //     print($__siteConfig);
-        // } else if(php_sapi_name() == "apache2handler") {
-        //     global $__siteConfig;
-        //     $__siteConfig = file_get_contents($_SERVER['DOCUMENT_ROOT'].'/../databaseConfig.json');
-
+        // if (php_sapi_name() == "cli") {
+        //     global $__site_config;
+        //     $__site_config_path = "/home/sibidharan/htdocs/photogram/project/databaseConfig.json";
+        //     $__site_config = file_get_contents($__site_config_path);
+        // //print($__site_config);
+        // } elseif (php_sapi_name() == "apache2handler") {
+        //     global $__site_config;
+        //     $__site_config_path = dirname(is_link($_SERVER['DOCUMENT_ROOT']) ? readlink($_SERVER['DOCUMENT_ROOT']) : $_SERVER['DOCUMENT_ROOT']).'/project/databaseConfig.json';
+        //     $__site_config = file_get_contents($__site_config_path);
         // }
-        
-        //TODO: $__siteConfig_path is a Doubtable thing 
-        $__siteConfig_path = __DIR__."/../../../project/databaseConfig.json";
-        // print($__siteConfig_path);
-        
-        // $__siteConfig_path = $_SERVER['DOCUMENT_ROOT'].'/../project/databaseConfig.json';
-        $__siteConfig = file_get_contents($__siteConfig_path);
-
-        if(php_sapi_name() == "cli"){
-            global $__siteConfig;
-            $__siteConfig = file_get_contents("/home/Jerlin/htdocs/app/project/databaseConfig.json");
-            print($__siteConfig);
-        } else if(php_sapi_name() == "apache2handler") {
-            global $__siteConfig;
-            $__siteConfig = file_get_contents($_SERVER['DOCUMENT_ROOT'].'/../project/databaseConfig.json');
-
-        }
-
+        // print(__DIR__);
+        global $__site_config;
+        $__site_config_path = __DIR__.'/../../../project/databaseConfig.json';
+        $__site_config = file_get_contents($__site_config_path);
         Database::getConnection();
+
     }
 
     public function initiateSession()

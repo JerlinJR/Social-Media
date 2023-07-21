@@ -72,6 +72,13 @@ $(document).ready(function(){
         console.log("Modal is been hide")
     });
 
+    $('#testtext').on('keydown', function(){
+        console.log("Key is pressed")
+    });
+
+    $('#testtext').on('keyup', function(){
+        console.log("Key is released")
+    });
 
     $('#fetchModal').on('click',function(){
         $.get('api/demo/modal', function(data, textSuccess){

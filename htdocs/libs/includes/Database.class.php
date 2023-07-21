@@ -14,28 +14,24 @@ class Database
     public static function getConnection()
     {
         if (Database::$conn == null) {
-            $servername = get_config('db_server');
-            $user_name = get_config('db_username');
-            $pass_word = get_config('db_password');
-            $dbname = get_config('db_name');
-     
-            $connection = new mysqli($servername, $user_name, $pass_word, $dbname);
-    
-            if ($connection->connect_error) {
-                die("Connection failed: " . $connection->connect_error);
-            } else {
-
-                // echo "Initial Database Connection";
-                // print_r(Database::$conn);
-                Database::$conn = $connection;
-                return Database::$conn;
+            $servername = get_config("db_server");
+            $user_name = get_config("db_username");
+            $pass_word = get_config("db_password");
+            $dbname = get_config("db_name");
+            
+            // Create connection
+            try {
+                Database::$conn = new mysqli($servername, $user_name, $pass_word, $dbname);
+            } catch (Exception $e) {
+                echo "Connection failed: " . $e->getMessage();
             }
-        } else {
-
-            // echo "Reusing Database Connection";
-                return Database::$conn;
         }
 
-}
+            // Check connection
+            if (Database::$conn->connect_error) {
+                die("Connection failed: " . Database::$conn->connect_error);
+            }
+            return Database::$conn;
+    }
 
 }

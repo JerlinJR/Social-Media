@@ -13,22 +13,37 @@ include_once 'includes/REST.class.php';
 include_once 'includes/API.class.php';
 
 
+global $__site_config;
+/*
+Note: Location of configuration
+in lab : /home/user/phtogramconfig.json
+in server: /var/www/photogramconfig.json
+*/
 
-
-// $wapi = new WebAPI();
-// $wapi->initiateSession();
 
 $wapi = new WebAPI();
 $wapi->initiateSession();
 
-global $__siteConfig;
-
-
 function get_config($key, $default=null)
 {
-    global $__siteConfig;
-    $array = json_decode($__siteConfig, true);
+    global $__site_config;
+    $array = json_decode($__site_config, true);
     if (isset($array[$key])) {
+        return $array[$key];
+    } else {
+        return $default;
+    }
+}
+
+function get_config2($key, $default = null, $configString = null)
+{
+    if ($configString === null) {
+        global $__site_config;
+        $configString = $__site_config;
+    }
+
+    $array = json_decode($configString, true);
+    if ($array !== null && isset($array[$key])) {
         return $array[$key];
     } else {
         return $default;
@@ -40,7 +55,7 @@ function load_template($name)
     include $_SERVER['DOCUMENT_ROOT'] .get_config("base_path")."/templates/$name.php";
     // include $_SERVER['DOCUMENT_ROOT']."/templates/$name.php";
 
-    include $_SERVER['DOCUMENT_ROOT'] .get_config('base_path')."templates/$name.php";
+    // include $_SERVER['DOCUMENT_ROOT'] .get_config('base_path')."templates/$name.php";
 
 }
 

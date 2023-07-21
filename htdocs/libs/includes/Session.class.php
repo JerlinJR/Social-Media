@@ -13,7 +13,7 @@ class Session
 
     public static function unset()
     {
-        sesstion_unset();
+        session_unset();
 
     }
 
